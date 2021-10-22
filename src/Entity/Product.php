@@ -76,9 +76,15 @@ class Product
      */
     private $opinions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=OrderLine::class, mappedBy="product")
+     */
+    private $orderLines;
+
     public function __construct()
     {
         $this->opinions = new ArrayCollection();
+        $this->orderLines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,6 +236,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($opinion->getProduct() === $this) {
                 $opinion->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderLine[]
+     */
+    public function getOrderLines(): Collection
+    {
+        return $this->orderLines;
+    }
+
+    public function addOrderLine(OrderLine $orderLine): self
+    {
+        if (!$this->orderLines->contains($orderLine)) {
+            $this->orderLines[] = $orderLine;
+            $orderLine->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderLine(OrderLine $orderLine): self
+    {
+        if ($this->orderLines->removeElement($orderLine)) {
+            // set the owning side to null (unless already changed)
+            if ($orderLine->getProduct() === $this) {
+                $orderLine->setProduct(null);
             }
         }
 
