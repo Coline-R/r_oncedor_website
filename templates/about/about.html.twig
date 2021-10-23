@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyclass %}{% endblock %}
+
+
+{% block main %}
+    <!-- MAIN -->
+    <main class="main" role="main">
+        <!-- breadcrumb's Thread -->
+        <div class="breadcrumb_thread">
+            <a href="#">Accueil</a>
+            <p>></p>
+            <a href="#" class="active">A propos</a>
+        </div>
+
+        <div class="about">
+            <h2>A propos</h2>
+            <div>
+                <img src="{{ asset('pictures/author.jpg') }}" alt="Portrait de l'autrice, R. Oncedor">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos repudiandae repellat ipsum, possimus
+                    tempore, saepe error expedita voluptatum nam sequi dolore ratione quia? Harum hic, quaerat ab
+                    obcaecati id fugit quos sit voluptates, in doloribus atque ducimus.
+                    Quas nihil aperiam doloribus molestiae aliquam dolore reiciendis necessitatibus ducimus? Nemo
+                    molestiae ab placeat nesciunt explicabo ducimus inventore pariatur, iste amet odio maxime dicta
+                    natus illo unde nostrum nisi dolor libero deleniti aliquid! Suscipit alias vero illo neque commodi
+                    consequatur cumque saepe laborum laboriosam enim.
+                </p>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
