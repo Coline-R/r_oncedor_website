@@ -1,0 +1,29 @@
+@charset 'UTF-8';
+
+/* * FORMS * */
+
+.form_block {
+    width: 70%;
+}
+
+form {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    & > label {
+        padding: 1rem;
+    }
+
+    & > input {
+        margin-bottom: .5rem;
+        padding: .5rem;
+    }
+
+    & > textarea {
+        margin-bottom: 1rem;
+    }
+}
+
