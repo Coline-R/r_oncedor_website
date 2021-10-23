@@ -15,10 +15,13 @@
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/constantine" type="text/css" />
 </head>
 
-<body>
+<body {% block bodyclass %}{% endblock %}>
     {# Import Header #}
     {% block header %}
         {% include 'includes/_header.html.twig' %}
+    {% endblock %}
+
+    {% block main %}
     {% endblock %}
 
     {# Import Footer #}
