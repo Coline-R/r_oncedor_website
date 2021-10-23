@@ -1,0 +1,70 @@
+@charset 'UTF-8';
+
+/* *** COMMON ELEMENTS *** */
+
+body {
+    background-color: $color-dark;
+    color: $color-light;
+    font-family: $font-montserrat;
+    line-height: 1.25;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: $font-constantine;  
+  padding: .75rem 0;
+  margin: 0;
+}
+
+h1 {
+    font-size: 2em;   
+    text-align: center;
+}
+  
+h2 {
+    font-size: 1.5em;
+    padding-bottom: 2rem;
+}
+  
+h3 {
+    font-size: 1.25em;
+    color: $color-title-purple;
+}
+  
+h4 {
+    font-size: 1em;
+}
+
+a {
+    text-decoration: none;
+    color: $color-light;
+
+    &.active {        
+      color: $color-btn-purple;
+    }
+
+    &:hover, 
+    &:focus {
+      text-decoration: underline;
+    }
+}
+
+button {
+    cursor: pointer;
+    color: $color-light;
+    background-color: $color-btn-purple;
+    border: 0 none;
+    border-radius: 5px;
+    margin: 0.5rem 0.5rem;
+    padding:0.5rem;
+    font-size: 1em;
+    max-width: 150px;
+  
+    &:hover,
+    &:focus {
+      color: $color-btn-purple;
+      background-color: $color-light;
+    }
+}
