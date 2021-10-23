@@ -1,0 +1,77 @@
+@charset 'UTF-8';
+
+// COLORS
+$color_dark_hf: #161616;
+$color-dark: #212121;
+$color-dark_rgba: rgba(33, 33, 33, 0.884);
+$color-light: #fdfcf3;
+$color-purple-light: #B19BCC;
+$color-btn-purple: #7148B8;
+$color-title-purple: #A773FE;
+
+// FONT-FAMILY
+$font-constantine: "Constantine";
+$font-montserrat: "MontserratRegular";
+
+// BREAKPOINTS
+$breakpoint-xs: 600px;  // mobile : 0 => 600px
+$breakpoint-sm: 960px; // tablet : 600px => 960px
+$breakpoint-md: 1280px; // small desktop : 960px => 1280px
+$brekpoint-lg: 1920px; // large desktop : 1280px => 1920px
+
+// Mixins media queries
+// < 600px
+@mixin xs {
+  @media (max-width: #{$breakpoint-xs - 1px}) {
+    @content;
+  }
+}
+
+// < 960px
+@mixin max-sm {
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+// < 1280px
+@mixin max-md {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+// between 600px and 960px
+@mixin sm {
+  @media (min-width: #{$breakpoint-xs}) and (max-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+// between 960px and 1280px
+@mixin md {
+  @media (min-width: #{$breakpoint-sm}) and (max-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+// from 600px
+@mixin min-xs {
+  @media (min-width: #{$breakpoint-xs}) {
+    @content;
+  }
+}
+
+// from 960px
+@mixin min-sm {
+  @media (min-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+// from 1280px
+@mixin min-md {
+  @media (min-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
