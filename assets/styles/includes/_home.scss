@@ -1,0 +1,24 @@
+@charset 'UTF-8';
+
+// Specific CSS for homepage
+
+/* *** HOMEPAGE *** */
+
+/* Home Body */
+.home_body {
+    height: 100vh;
+}
+
+/* Home Main*/
+
+.home_main {
+    height: 75%;
+
+    background-image: url(/assets/pictures/banner.jpg);
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
