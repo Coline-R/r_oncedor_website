@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - R. Oncedor{% endblock %}
+
+{% block bodyclass %}class="home_body"{% endblock %}
+
+    {% block header %}
+        <!-- HEADER -->
+        <header class="home_header header" role="banner">
+            <nav class="header_nav" role="navigation" aria-label="Menu principal">
+                <div>
+                    <img src="{{ asset('pictures/logo_1.png') }}" />
+                </div>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Précommande</a></li>
+                    <li><a href="#">Bibliographie</a></li>
+                    <li><a href="#">A propos</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li class="btn_link"><a href="#">Panier</a></li>
+                    <li class="btn_link"><a href="#">Connexion</a></li>
+                    <li class="btn_link"><a href="#">Inscription</a></li>
+                </ul>
+            </nav>
+        </header>
+    {% endblock %}
+
+    {% block main %}
+        <!-- MAIN -->
+        <main class="home_main" role="main">
+            <div class="site_title">
+                <h1>R. Oncedor</h1>
+                <h4>Histoires Farfelues</h4>
+            </div>
+        </main>
+    {% endblock %}
