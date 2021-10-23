@@ -1,19 +1,55 @@
 <!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Import CSS -->
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <!-- Import Fonts -->
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/montserrat" type="text/css" />
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/constantine" type="text/css" />
+</head>
+
+<body>
+    {# Import Header #}
+    {% block header %}
+        {% include 'includes/_header.html.twig' %}
+    {% endblock %}
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+{# <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
+        {# {% block stylesheets %} #}
             {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+        {# {% endblock %} #}
 
-        {% block javascripts %}
+        {# {% block javascripts %} #}
             {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+        {# {% endblock %} #}
+    {# </head> #}
+    {# <body> #}
+        {# {% block body %}{% endblock %} #}
+    {# </body> #}
+{# </html> #}
