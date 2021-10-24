@@ -4,9 +4,17 @@
 
 .form_block {
     width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include min-md {
+        width: 50%;
+    }
 }
 
 form {
+    width: 80%;
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
@@ -14,6 +22,7 @@ form {
     align-items: center;
 
     & > label {
+        text-align: left;
         padding: 1rem;
     }
 
@@ -24,6 +33,35 @@ form {
 
     & > textarea {
         margin-bottom: 1rem;
+    }
+
+    & > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        & > label {
+            padding: 1rem 0;
+        }
+    
+        & > input {
+            width: 100%;
+            margin-bottom: .5rem;
+            padding: .5rem;
+
+            @include xs {
+                width: 90%;
+            }
+
+            @include max-sm {
+                width: 90%;
+            }
+        }
+    
+        & > textarea {
+            margin-bottom: 1rem;
+        }
     }
 }
 
