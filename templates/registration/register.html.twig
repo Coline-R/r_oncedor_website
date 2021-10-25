@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - R. Oncedor{% endblock %}
+
+{% block main %}
+    <main class="main" role="main">
+
+        <!-- breadcrumb's Thread -->
+        <div class="breadcrumb_thread">
+            <a href="#">Accueil</a>
+            <p>></p>
+            <a href="#" class="active">Inscription</a>
+        </div>
+
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        <div class="form_block">
+            <h1>Inscription</h1>
+
+            {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.firstName) }}
+                {{ form_row(registrationForm.lastName) }}
+                {{ form_row(registrationForm.phoneNumber) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+
+                <button type="submit" class="btn">Enregistrer</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </main>
+{% endblock %}
