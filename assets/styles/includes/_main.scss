@@ -49,3 +49,37 @@
         }
     }
 }
+
+// ADMIN and USER HOMEPAGE
+
+.back_home {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > p {
+        text-align: left ;
+    }
+
+    & > div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        & > a {
+            padding: .5rem;
+            margin: 1rem;
+            width: 50%;
+            height: 25%;
+            background-color: #7148B8;
+            text-align: center;
+
+            @include xs {
+                width: 90%;
+                height: 50%;
+            }
+        }
+    }
+}
