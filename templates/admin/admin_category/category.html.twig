@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Categories - R. Oncedor{% endblock %}
+
+{% block main %}
+    <main class="main" role="main">
+
+        <!-- breadcrumb's Thread -->
+        <div class="breadcrumb_thread">
+            <a href="{{ path('home') }}">Accueil</a>
+            <p>></p>
+            <a href="{{ path('admin_product') }}">Administration</a>
+            <p>></p>
+            <a href="#" class="active">Gestion des Catégories</a>
+        </div>
+
+        <h1>Gestion des Catégories</h1>
+
+        <div class="admin_block">
+            {% include 'includes/_admin_menu.html.twig' %}
+            <div class="admin_content">
+                <div>
+                    <a href="{{path('admin_category_add')}}" class="btn_link">ajouter</a>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                            <tr>
+                                <th>{{category.id}}</th>
+                                <th>{{category.name}}</th>
+                                <th>
+                                    <a href="{{ path('admin_category_edit', { id: category.id }) }}" class="btn_link">Editer</a>
+                                    <a href="{{ path('admin_category_delete', { id: category.id }) }}" class="btn_link">Supprimer</a>
+                                </th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            <div>
+        </div>
+    </main>
+{% endblock %}
+
