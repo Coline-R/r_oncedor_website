@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Catégories - R. Oncedor{% endblock %}
+
+{% block main %}
+    <main class="main" role="main">
+
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="{{ path('admin_product') }}">Administration</a>
+        <p>></p>
+        <a href="{{ path('admin_category') }}">Gestion des catégories</a>
+        <p>></p>
+        <a href="#" class="active">Modifier une catégorie</a>
+    </div>
+
+    <h1>Modifier une catégorie</h1>
+        {% include 'admin/includes_admin_form/_category_form.html.twig' %}
+    </main>
+{% endblock %}
