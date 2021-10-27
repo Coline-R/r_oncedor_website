@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+    {% block main %}
+        <main class="main" role="main">
+
+        <!-- breadcrumb's Thread -->
+        <div class="breadcrumb_thread">
+            <a href="#">Accueil</a>
+            <p>></p>
+            <a href="#">Administration</a>
+            <p>></p>
+            <a href="#">Gestion des produits</a>
+            <p>></p>
+            <a href="#" class="active">Ajouter un produit</a>
+        </div>
+
+        <h1>Ajouter un produit</h1>
+            {% include 'admin/includes_admin_form/_product_form.html.twig' %}
+        </main>
+    {% endblock %}
