@@ -2,18 +2,29 @@
 <header class="header" role="banner">
     <nav class="header_nav" role="navigation" aria-label="Menu principal">
         <div>
-            <img src="{{ asset('pictures/logo_1.png') }}" />
+            <a href="{{ path('home') }}"><img src="{{ asset('pictures/logo_1.png') }}" /></a>
         </div>
-        <ul>
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">Précommande</a></li>
-            <li><a href="#">Bibliographie</a></li>
-            <li><a href="#">A propos</a></li>
-            <li><a href="#">Contact</a></li>
-            <li class="btn_link"><a href="#">Panier</a></li>
-            <li class="btn_link"><a href="#">Connexion</a></li>
-            <li class="btn_link"><a href="#">Inscription</a></li>
-        </ul>
+            <ul>
+                <li><a href="{{ path('home') }}">Accueil</a></li>
+                <li><a href="#">Précommande</a></li>
+                <li><a href="#">Bibliographie</a></li>
+                <li><a href="{{ path('about') }}">A propos</a></li>
+                <li><a href="#">Contact</a></li>
+                <li class="btn_link"><a href="#">Panier</a></li>
+                {% if is_granted('ROLE_USER') %}
+                    <li class="btn_link"><a href="#">Mon espace client</a></li>
+                {% elseif is_granted('ROLE_ADMIN') %}
+                    <li class="btn_link"><a href="#">Administration</a></li>
+                {% else %}
+                    <li class="btn_link"><a href="{{ path('app_register') }}">Inscription</a></li>
+                {% endif %}
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="btn_link"><a href="{{ path('app_logout') }}">Me déconnecter</a></li>
+                {% else %}
+                    <li class="btn_link"><a href="{{ path('app_login') }}">Connexion</a></li>
+                {% endif %}
+            </ul>
     </nav>
     <div class="header_banner">
         <div class="site_title">

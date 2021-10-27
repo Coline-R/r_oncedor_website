@@ -24,10 +24,12 @@
         justify-content: center;
         align-items: center;
 
+      & > a {
         & > img {
-            width: 50%;
-            height: auto;
-        }
+          width: 50%;
+          height: auto;
+        } 
+      }
     }
 
     & > ul {
