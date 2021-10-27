@@ -3,8 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Entity\Type;
+use App\Entity\Category;
+use App\Entity\Edition;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,14 +23,36 @@ class ProductType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => "Nom"
             ])
-            ->add('description', TextareaType::class)
-            ->add('summary', TextareaType::class)
-            ->add('price', NumberType::class )
-            ->add('tome', NumberType::class)
-            ->add('picture', FileType::class)
-            ->add('type', ChoiceType::class)
-            ->add('category', ChoiceType::class)
-            ->add('edition', ChoiceType::class)
+            ->add('description', TextareaType::class, [
+                'label' => "Description"
+            ])
+            ->add('summary', TextareaType::class, [
+                'label' => "Résumé"
+            ])
+            ->add('price', NumberType::class, [
+                'label' => "Prix"
+            ] )
+            ->add('tome', NumberType::class, [
+                'label' => "Tome"
+            ])
+            ->add('picture', FileType::class, [
+                'label' => 'Image',
+            ])
+            ->add('type', EntityType::class, [
+                'label' => 'Type',
+                'class' => Type::class,
+                'choice_label' => 'name' 
+            ])
+            ->add('category', EntityType::class, [
+                'label' => 'Catégorie',
+                'class' => Category::class,
+                'choice_label' => 'name' 
+            ])
+            ->add('edition', EntityType::class, [
+                'label' => 'Edition',
+                'class' => Edition::class,
+                'choice_label' => 'name' 
+            ])
         ;
     }
 
