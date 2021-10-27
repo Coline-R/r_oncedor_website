@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Editions - R. Oncedor{% endblock %}
+
+{% block main %}
+    <main class="main" role="main">
+
+        <!-- breadcrumb's Thread -->
+        <div class="breadcrumb_thread">
+            <a href="{{ path('home') }}">Accueil</a>
+            <p>></p>
+            <a href="{{ path('admin_product') }}">Administration</a>
+            <p>></p>
+            <a href="{{ path('admin_edition') }}">Gestion des éditions</a>
+            <p>></p>
+            <a href="#" class="active">Ajouter une édition</a>
+        </div>
+
+        <h1>Ajouter une édition</h1>
+        {% include 'admin/includes_admin_form/_edition_form.html.twig' %}
+    </main>
+{% endblock %}
