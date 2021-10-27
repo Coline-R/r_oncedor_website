@@ -7,11 +7,11 @@
 
         <!-- breadcrumb's Thread -->
         <div class="breadcrumb_thread">
-            <a href="#">Accueil</a>
+            <a href="{{ path('home') }}">Accueil</a>
             <p>></p>
-            <a href="#">Administration</a>
+            <a href="{{ path('admin_product') }}">Administration</a>
             <p>></p>
-            <a href="#" class="active">Produits</a>
+            <a href="#" class="active">Gestion des produits</a>
         </div>
 
         <h1>Gestion des produits</h1>
@@ -19,6 +19,9 @@
         <div class="admin_block">
             {% include 'includes/_admin_menu.html.twig' %}
             <div class="admin_content">
+                <div>
+                    <a href="{{path('admin_product_add')}}" class="btn_link">ajouter</a>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -35,16 +38,16 @@
                     <tbody>
                         {% for product in products %}
                             <tr>
-                                <th>product.id</th>
-                                <th>product.name</th>
-                                <th>product.price</th>
-                                <th>product.type</th>
-                                <th>product.category</th>
-                                <th>product.edition</th>
-                                <th>product.tome</th>
+                                <th>{{product.id}}</th>
+                                <th>{{product.name}}</th>
+                                <th>{{product.price}}</th>
+                                <th>{{product.type.name}}</th>
+                                <th>{{product.category.name}}</th>
+                                <th>{{product.edition.name}}</th>
+                                <th>{{product.tome}}</th>
                                 <th>
-                                    <a href="#">Editer</a>
-                                    <a href="#">Supprimer</a>
+                                    <a href="{{ path('admin_product_edit', { id: product.id }) }}" class="btn_link">Editer</a>
+                                    <a href="{{ path('admin_product_delete', { id: product.id }) }}" class="btn_link">Supprimer</a>
                                 </th>
                             </tr>
                         {% endfor %}
