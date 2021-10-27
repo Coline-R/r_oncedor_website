@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Type;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,12 +55,12 @@ class AdminProductController extends AbstractController
         ]);
     }
 
-    /**
+     /**
      * @Route("/admin/product/edit/{id}", name="admin_product_edit")
      */
     public function edit($id, Request $request): Response
     {
-        // Fetch prodduct by ID for modification
+        // Fetch product by ID for modification
         $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
 
         $form = $this->createForm(ProductType::class, $product);
@@ -74,7 +76,7 @@ class AdminProductController extends AbstractController
             return $this->redirectToRoute('admin_product');
         }
 
-        return $this->render('admin/admin_product/product_edit.html.twig', [
+        return $this->render('admin/admin_product/type_product.html.twig', [
             'form' => $form->createView()
         ]);
     }
