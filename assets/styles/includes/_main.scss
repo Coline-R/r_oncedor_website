@@ -49,3 +49,51 @@
         }
     }
 }
+
+// ADMIN PAGES
+.admin_block {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include xs {
+        flex-direction: column;
+    }
+
+    @include max-sm {
+        flex-direction: column;
+    }
+
+    .admin_menu {
+        width: 20%;
+        padding: 1rem;
+        background-color: $color_dark_hf;
+
+        @include xs {
+            width: 80%;
+        }
+    
+        @include max-sm {
+            width: 80%;
+        }
+    
+        li {
+            list-style-type: none;
+        }
+    
+        & > ul > ul > li {
+            margin-left: 1.5rem;
+        }
+    }
+
+    .admin_content {
+        width: 80%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+

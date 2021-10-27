@@ -1,0 +1,16 @@
+@charset 'UTF-8';
+
+table {
+    table-layout: auto;
+    border-collapse: collapse;
+    empty-cells: show;
+}
+
+tr {
+    border-bottom: 1px solid $color-light;
+    vertical-align: middle;
+
+    & > th {
+        padding: 1rem;
+    }
+}
