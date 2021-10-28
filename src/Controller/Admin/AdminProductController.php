@@ -76,7 +76,7 @@ class AdminProductController extends AbstractController
             return $this->redirectToRoute('admin_product');
         }
 
-        return $this->render('admin/admin_product/type_product.html.twig', [
+        return $this->render('admin/admin_product/product_edit.html.twig', [
             'form' => $form->createView()
         ]);
     }
