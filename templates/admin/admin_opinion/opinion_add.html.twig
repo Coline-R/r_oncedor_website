@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Avis lecteurs - R. Oncedor{% endblock %}
+
+    {% block main %}
+        <main class="main" role="main">
+
+            <!-- breadcrumb's Thread -->
+            <div class="breadcrumb_thread">
+                <a href="{{ path('home') }}">Accueil</a>
+                <p>></p>
+                <a href="{{ path('admin_product') }}">Administration</a>
+                <p>></p>
+                <a href="{{ path('admin_opinion') }}">Gestion des avis lecteur</a>
+                <p>></p>
+                <a href="#" class="active">Ajouter un avis lecteur</a>
+            </div>
+
+        <h1>Ajouter un avis lecteur</h1>
+            {% include 'admin/includes_admin_form/_opinion_form.html.twig' %}
+        </main>
+    {% endblock %}
