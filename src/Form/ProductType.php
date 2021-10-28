@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductType extends AbstractType
 {
@@ -35,9 +36,6 @@ class ProductType extends AbstractType
             ->add('tome', NumberType::class, [
                 'label' => "Tome"
             ])
-            ->add('picture', FileType::class, [
-                'label' => 'Image',
-            ])
             ->add('type', EntityType::class, [
                 'label' => 'Type',
                 'class' => Type::class,
@@ -52,6 +50,9 @@ class ProductType extends AbstractType
                 'label' => 'Edition',
                 'class' => Edition::class,
                 'choice_label' => 'name' 
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'required' => false
             ])
         ;
     }
