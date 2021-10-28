@@ -24,7 +24,7 @@ class Product
     private $id;
 
     /**
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
      * 
      * @var File|null
      */
