@@ -45,11 +45,6 @@ class Product
     private $tome;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $picture;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isPreorder;
@@ -148,18 +143,6 @@ class Product
     public function setTome(int $tome): self
     {
         $this->tome = $tome;
-
-        return $this;
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?string $picture): self
-    {
-        $this->picture = $picture;
 
         return $this;
     }
