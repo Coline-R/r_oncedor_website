@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliographie - R. Oncedor{% endblock %}
+
+
+{% block main %}
+    <!-- MAIN -->
+    <main class="main" role="main">
+        <!-- breadcrumb's Thread -->
+        <div class="breadcrumb_thread">
+            <a href="#">Accueil</a>
+            <p>></p>
+            <a href="#" class="active">Bibliographie</a>
+        </div>
+
+        <div class="bibliography">
+            <h2>Bibliography</h2>
+            <div class="book_category">
+                <div>
+                    {% for book in books %}
+                    <div class="book">                        
+                        <img src="{{ vich_uploader_asset(book, 'imageFile') }}" alt="{{ book.name }}" />
+                        <h4>{{ book.name }}</h4>
+                        <p>Tome {{ book.tome }}</p>
+                        <p>Edition {{ book.edition.name }}<p>
+                        <button><a href="#">En savoir plus</a></button>
+                    </div>
+                    {% endfor %}
+                </div>
+        </div>
+    </main>
+{% endblock %}
+
