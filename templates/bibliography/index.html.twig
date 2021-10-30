@@ -23,7 +23,7 @@
                         <h4>{{ book.name }}</h4>
                         <p>Tome {{ book.tome }}</p>
                         <p>Edition {{ book.edition.name }}<p>
-                        <button><a href="#">En savoir plus</a></button>
+                        <button><a href="{{ path('book', {id: book.id}) }}">En savoir plus</a></button>
                     </div>
                     {% endfor %}
                 </div>
