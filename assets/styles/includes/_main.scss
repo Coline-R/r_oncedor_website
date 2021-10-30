@@ -109,3 +109,39 @@
     }
 }
 
+/* *Bibliography page* */
+
+.bibliography {
+    width: 70%;
+}
+
+.book_category {
+    padding: 2rem;
+    
+    & > h3 {
+        border-bottom: 1px solid $color-light;
+        margin-bottom: 2rem;
+    }
+
+    & > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}
+
+.book {
+    padding-bottom: .5rem;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+        height: 20rem;
+        width: auto;
+    }
+}
+
