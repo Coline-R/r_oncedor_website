@@ -14,13 +14,13 @@
                 <ul>
                     <li><a href="{{ path('home') }}">Accueil</a></li>
                     <li><a href="#">Précommande</a></li>
-                    <li><a href="#">Bibliographie</a></li>
+                    <li><a href="{{ path('bibliography') }}">Bibliographie</a></li>
                     <li><a href="{{ path('about') }}">A propos</a></li>
                     <li><a href="#">Contact</a></li>
                     <li class="btn_link"><a href="#">Panier</a></li>
 
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li class="btn_link"><a href="#">Administration</a></li>
+                        <li class="btn_link"><a href="{{ path('admin_product') }}">Administration</a></li>
                     {% elseif is_granted('ROLE_USER') %}
                         <li class="btn_link"><a href="#">Mon espace client</a></li>
                     {% else %}
