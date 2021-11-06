@@ -9,7 +9,7 @@
     <div class="breadcrumb_thread">
         <a href="{{ path('home') }}">Accueil</a>
         <p>></p>
-        <a href="{{ path('admin_product') }}">Espace client</a>
+        <a href="{{ path('user_profile') }}">Espace client</a>
         <p>></p>
         <a href="#" class="active">Mes informations</a>
     </div>
@@ -21,7 +21,7 @@
             <p>Prénom : {{ app.user.firstname }}</p>
             <p>Nom : {{ app.user.lastname }}</p>
             <p>Email : {{ app.user.email }}</p>
-            <a href="#">Modifier mes informations</a>
+            <a href="{{ path('user_profile_edit') }}">Modifier mes informations</a>
             <a href="#">Changer mon mot de passe</a>
         </div>
     </div>
