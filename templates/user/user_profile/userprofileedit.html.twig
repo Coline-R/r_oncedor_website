@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes informations - R. Oncedor{% endblock %}
+
+{% block main %}
+<main class="main" role="main">
+
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="{{ path('user_profile') }}">Espace client</a>
+        <p>></p>
+        <a href="{{ path('user_profile') }}">Mes informations</a>
+        <p>></p>
+        <a href="#" class="active">Modifier mes informations</a>
+    </div>
+
+    <div class="form_block">
+        {{ form_start(form) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.phoneNumber) }}
+        <button type="submit" class="btn">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+</main>
+{% endblock %}

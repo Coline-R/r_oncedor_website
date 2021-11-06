@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Produits - R. Oncedor{% endblock %}
+
+{% block main %}
+<main class="main" role="main">
+
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="{{ path('user_profile') }}">Espace client</a>
+        <p>></p>
+        <a href="#" class="active">Mes informations</a>
+    </div>
+
+    <h2>Mes informations</h2>
+
+    <div class="user_block">
+        <div>
+            <p>Prénom : {{ app.user.firstname }}</p>
+            <p>Nom : {{ app.user.lastname }}</p>
+            <p>Email : {{ app.user.email }}</p>
+            <a href="{{ path('user_profile_edit') }}">Modifier mes informations</a>
+            <a href="#">Changer mon mot de passe</a>
+        </div>
+    </div>
+</main>
+{% endblock %}
