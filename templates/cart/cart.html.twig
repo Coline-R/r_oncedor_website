@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier - R. Oncedor{% endblock %}
+
+{% block main %}
+<!-- MAIN -->
+<main class="main" role="main">
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="#" class="active">Panier</a>
+    </div>
+
+    <div class="about">
+        <h2>Panier</h2>
+        <div>
+            {% if items | length > 0 %}
+            <table>
+                <thead>
+                    <td>Titre</td>
+                    <td>Catégorie</td>
+                    <td>Tome</td>
+                    <td>Prix</td>
+                    <td>Quantité</td>
+                    <td>Total</td>
+                    <td>Gérer la quantité</td>
+                    <td>Supprimer</td>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.product.category.name }}</td>
+                        <td>{{ item.product.tome }}</td>
+                        <td>{{ item.product.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price * item.quantity }}</td>
+                        <td>
+                            <a href="{{ path('cart_add', {'id': item.product.id}) }}">+</a>
+                            <a href="{{ path('cart_remove', {'id': item.product.id}) }}">-</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('cart_remove', {'id': item.product.id}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <td colspan="5" class="total">Total du panier</td>
+                    <td>{{ totalCartPrice }}</td>
+                    <td>€</td>
+                </tfoot>
+            </table>
+
+            {% else %}
+            <p>Vous n'avez pas de produits dans votre panier !</p>
+            {% endif %}
+        </div>
+        <a href="#">Commander</a>
+    </div>
+</main>
+{% endblock %}
