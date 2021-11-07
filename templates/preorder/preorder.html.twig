@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Précommande - R. Oncedor {% endblock %}
+
+{% block main %}
+<!-- MAIN -->
+<main class="main" role="main">
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="#" class="active">Précommande</a>
+    </div>
+
+    <div class="about">
+        <h2>Précommande</h2>
+        <h3>{{ book.name }} - {{ book.category.name }} - Tome {{ book.tome }}</h3>
+        <div>
+            <img src="{{ vich_uploader_asset(book, 'imageFile') }}" alt="{{ book.name }}" />
+            <div>
+                <h3> Détails </h3>
+                <p>Edition {{ book.edition.name }}</p>
+                <p>{{ book.description }}</p>
+                <h3> Résumé </h3>
+                <p> {{book.summary}} </p>
+            </div>
+        </div>
+        <a href="#">Précommander</a>
+        <h3>Modalités de précommande</h3>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla sint adipisci consectetur. A id iusto
+                ipsam? Praesentium voluptatibus doloremque quisquam blanditiis iure. Quas ipsa velit fugit fuga libero
+                et ad! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias nihil iure ex rerum beatae
+                voluptate, eos deserunt! Itaque temporibus molestiae tempora odio ut atque cum, sed modi saepe nesciunt
+                magnam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum modi impedit pariatur
+                voluptatibus corrupti? Esse, aliquid corporis. Illo, atque qui fugit, sit dolorum ab nisi neque, est
+                exercitationem deserunt vero. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum culpa
+                cumque rerum quod, explicabo error velit odit soluta modi nam accusantium. Porro voluptatum eveniet
+                sapiente dolore facere culpa aspernatur repellendus. Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Minima iusto beatae expedita itaque totam, recusandae dolor nulla voluptas inventore, odio
+                molestiae? Autem ut distinctio totam commodi, dolor deserunt. Ducimus, cumque? Lorem ipsum dolor sit
+                amet consectetur adipisicing elit. Iure possimus suscipit ea, totam dolorem ullam? Perspiciatis
+                laudantium molestias iusto iste quod nisi repudiandae doloribus earum, et alias odit laborum itaque.
+            </p>
+        </div>
+    </div>
+</main>
+{% endblock %}
