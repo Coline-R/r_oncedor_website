@@ -18,7 +18,7 @@ class BibliographyController extends AbstractController
         $books = $this->getDoctrine()->getManager()->getRepository(Product::class)->findBy(array('type' => '2'));
         $product = $this->getDoctrine()->getManager()->getRepository(Product::class)->findAll();
 
-        return $this->render('bibliography/index.html.twig', [
+        return $this->render('bibliography/bibliography.html.twig', [
             'books' => $books,
             'product' => $product
         ]);
