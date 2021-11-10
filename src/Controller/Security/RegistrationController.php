@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
@@ -51,14 +51,14 @@ class RegistrationController extends AbstractController
                     ->from(new Address('no-reply@roncedor-test.fr', 'no-reply-r.oncedor-test'))
                     ->to($user->getEmail())
                     ->subject('Confirmer votre adresse mail')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('security/registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('security/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }

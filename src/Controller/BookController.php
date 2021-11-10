@@ -18,7 +18,7 @@ class BookController extends AbstractController
 
         dump($book);
 
-        return $this->render('book/index.html.twig', [
+        return $this->render('book/book.html.twig', [
             'book' => $book
         ]);
     }
