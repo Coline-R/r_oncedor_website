@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Stripe\Stripe;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CheckoutController extends AbstractController
 {
@@ -84,8 +86,62 @@ class CheckoutController extends AbstractController
     /**
      * @Route("/checkout/payement", name="checkout_payement")
      */
-    // public function payement()
-    // {
+    public function payement(SessionInterface $session, ProductRepository $productRepo, $stripeSK): Response
+    {
+        // Stripe APIKey
+        Stripe::setApiKey($stripeSK);
 
-    // }
+        // Cart informations
+        $orderCart = $session->get('cart', []);
+
+        $cartData = [];
+        $totalCartPrice = 0;
+
+        foreach($orderCart as $id=>$quantity)
+        {
+            $product = $productRepo->find($id);
+            $cartData[] = [
+                'product' => $product,
+                'quantity' => $quantity
+            ];
+            
+            $totalCartPrice += $product->getPrice() * $quantity;
+        }
+
+        // Create stripe payement intent
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+              'price_data' => [
+                'currency' => 'eur',
+                'product_data' => [
+                  'name' => 'Votre précommande sur le site ...',
+                ],
+                'unit_amount' => $totalCartPrice * 100,
+              ],
+              'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => $this->generateUrl('checkout_success',[], UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_url' => $this->generateUrl('checkout_cancel',[], UrlGeneratorInterface::ABSOLUTE_URL),
+          ]);
+
+          return $this->redirect($session->url, 303);
+    }
+
+    /**
+     * @Route("/checkout/success", name="checkout_success")
+     */
+    public function success(): Response
+    {
+        return $this->render('checkout/checkout_success.html.twig');
+    }
+
+    /**
+     * @Route("/checkout/cancel", name="checkout_cancel")
+     */
+    public function cancel(): Response
+    {
+        return $this->render('checkout/checkout_cancel.html.twig');
+    }
 }

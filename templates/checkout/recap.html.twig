@@ -44,7 +44,11 @@
                 {% endfor %}
             </div>
         </div>
-        <button>Payer</button>
+        <div class="form_block">
+            <form action="{{ path('checkout_payement') }}" method="POST">
+                <button type="submit">Payer</button>
+            </form>
+        </div>
     </div>
 </main>
 {% endblock %}
