@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commander - R. Oncedor{% endblock %}
+
+{% block main %}
+<!-- MAIN -->
+<main class="main" role="main">
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="#" class="active">Commander</a>
+    </div>
+
+    <div class="about">
+        <h2>Commander</h2>
+        <div>
+            <h3>Adresse de livraison</h3>
+            <p>Choisissez votre adresse de livraison</p>
+            <div class="form_block">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button type="submit" class="btn">Valider</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
