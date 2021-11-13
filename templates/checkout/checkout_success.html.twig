@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commander - R. Oncedor{% endblock %}
+
+{% block main %}
+<!-- MAIN -->
+<main class="main" role="main">
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="#" class="active">Commande enregistrée</a>
+    </div>
+
+    <div class="about">
+        <h2>Commande enregistrée !</h2>
+        <p>Votre commande a bien été enregistrée !</p>
+        <p>Merci !</p>
+    </div>
+</main>
+{% endblock %}

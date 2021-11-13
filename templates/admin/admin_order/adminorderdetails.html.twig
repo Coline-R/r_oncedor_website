@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace client - Détails de ma commande - R. Oncedor{% endblock %}
+
+{% block main %}
+<main class="main" role="main">
+
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="{{ path('admin_product') }}">Administration</a>
+        <p>></p>
+        <a href="{{ path('admin_order') }}">Administration des commande</a>
+        <p>></p>
+        <a href="#" class="active">Détails de commande</a>
+    </div>
+
+
+    <h2>Détails de commande</h2>
+
+    <div class="user_block">
+        {% for orderLine in orderLines %}
+        <div>
+            <p>Produit : {{ orderLine.product.name }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

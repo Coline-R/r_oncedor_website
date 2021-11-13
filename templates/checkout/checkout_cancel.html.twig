@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commander - R. Oncedor{% endblock %}
+
+{% block main %}
+<!-- MAIN -->
+<main class="main" role="main">
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="#" class="active">Commande annulée</a>
+    </div>
+
+    <div class="about">
+        <h2>Commande annulée !</h2>
+        <p>Il semble que vous ayez annulée votre commande ou que le paiement ai échoué</p>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - Commandes - R. Oncedor{% endblock %}
+
+{% block main %}
+<main class="main" role="main">
+
+    <!-- breadcrumb's Thread -->
+    <div class="breadcrumb_thread">
+        <a href="{{ path('home') }}">Accueil</a>
+        <p>></p>
+        <a href="{{ path('admin_product') }}">Administration</a>
+        <p>></p>
+        <a href="#" class="active">Administration des commande</a>
+    </div>
+
+    <h1>Commandes</h1>
+
+    <div>
+        <h2>Commandes non expédiées</h2>
+        <div>
+            {% for order in noShippedOrder %}
+            {{order.id}}
+            {{order.address.name}}
+            <a href="{{ path('admin_order_details', {id:order.id}) }}">Détails</a>
+            <a href="{{ path('admin_order_shipping', {id:order.id}) }}">Marquer comme expédiée</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <h2>Commandes expédiées</h2>
+        {% for order in shippedOrder %}
+        {{order.id}}
+        {% endfor %}
+    </div>
+
+</main>
+{% endblock %}
