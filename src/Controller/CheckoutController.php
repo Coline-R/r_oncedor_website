@@ -3,9 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Order;
+use App\Entity\OrderLine;
 use App\Entity\Product;
 use App\Entity\User;
+use App\Repository\AddressRepository;
+use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
@@ -132,8 +137,60 @@ class CheckoutController extends AbstractController
     /**
      * @Route("/checkout/success", name="checkout_success")
      */
-    public function success(): Response
+    public function success(SessionInterface $session, ProductRepository $productRepo, AddressRepository $addressRepo, OrderRepository $orderRepo): Response
     {
+        $em = $this->getDoctrine()->getManager();
+
+        // register order in database
+        $order = new Order;
+
+        $address = $session->get('deliverAddress', []);
+        $deliverAddress = $addressRepo->find($address->getId());
+
+        $order->setOrderDate(new DateTime());
+        $order->setAddress($deliverAddress);
+        $order->setIsShipped(false);
+
+        $em->persist($order);
+        $em->flush();
+
+        // catch order id and register all order line in database
+        $orderCart = $session->get('cart', []);
+        $orderId = $orderRepo->find($order->getId());
+
+
+        foreach ($orderCart as $id=>$quantity) {
+            $product = $productRepo->find($id);
+            $cartData[] = [
+                'product' => $product,
+                'quantity' => $quantity
+            ];
+        }
+
+        for ($i = 0 ; $i < count($cartData) ; $i++) {
+            if ($cartData[$i]['quantity'] == 1) {
+                $orderLine = new OrderLine;
+                $productId = $productRepo->find($cartData[$i]['product']->getId());
+                $orderLine->setProduct($productId);
+                $orderLine->setCommand($orderId);
+
+                $em->persist($orderLine);
+                $em->flush();
+            } else {
+                for ($j = 0 ; $j < $cartData[$i]['quantity']; $j++) {
+                    $orderLine = new OrderLine;
+
+                    $productId = $productRepo->find($cartData[$i]['product']->getId());
+                    $orderLine->setProduct($productId);
+                    $orderLine->setCommand($orderId);
+
+                    $em->persist($orderLine);
+                    $em->flush();
+                }
+            }
+        }
+        
+
         return $this->render('checkout/checkout_success.html.twig');
     }
 
