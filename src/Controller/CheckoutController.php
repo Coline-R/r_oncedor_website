@@ -149,6 +149,7 @@ class CheckoutController extends AbstractController
 
         $order->setOrderDate(new DateTime());
         $order->setAddress($deliverAddress);
+        $order->setUser($this->getUser());
         $order->setIsShipped(false);
 
         $em->persist($order);
