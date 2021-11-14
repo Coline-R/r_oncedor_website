@@ -26,7 +26,7 @@
             {{ address.city }}
             {{ address.country }}
             <a href="{{ path('user_address_edit', {id: address.id}) }}">Modifier</a>
-            <a href="{{ path('user_address_delete', {id: address.id}) }}">Supprimer</a>
+            <a href="{{ path('user_address_delete', {id: address.id}) }}" onclick="return confirm('Etes vous sûre de vouloir supprimer cette adresse : {{address.name}} ? ')">Supprimer</a>
         </div>
         {% endfor %}
     </div>

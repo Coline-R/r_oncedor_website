@@ -36,7 +36,7 @@
                                 <th>{{edition.name}}</th>
                                 <th>
                                     <a href="{{ path('admin_edition_edit', { id: edition.id }) }}" class="btn_link">Editer</a>
-                                    <a href="{{ path('admin_edition_delete', { id: edition.id }) }}" class="btn_link">Supprimer</a>
+                                    <a href="{{ path('admin_edition_delete', { id: edition.id }) }}" class="btn_link" onclick="return confirm('Etes vous sûre de vouloir supprimer {{edition.name}} ? ')">Supprimer</a>
                                 </th>
                             </tr>
                         {% endfor %}
