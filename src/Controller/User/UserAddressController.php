@@ -3,31 +3,31 @@
 namespace App\Controller\User;
 
 use App\Entity\Address;
-use App\Entity\User;
 use App\Form\AddressType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UserAdressController extends AbstractController
+class UserAddressController extends AbstractController
 {
     /**
-     * @Route("/user/adress", name="user_address")
+     * @Route("/user/address", name="user_address")
      */
     public function index(): Response
     {   
         $user = $this->getUser();
-        $adresses = $user->getAddresses();
-        return $this->render('user/user_adress/useradress.html.twig', [
-            'adresses' => $adresses
+        $addresses = $user->getAddresses();
+        return $this->render('user/user_address/useraddress.html.twig', [
+            'addresses' => $addresses
         ]);
     }
 
     /**
-     * @Route("/user/adress/add", name="user_address_add")
+     * @Route("/user/address/add", name="user_address_add")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, EntityManagerInterface $em): Response
     {
         // create new adress and set current connected user owner of the adress
         $address = new Address;
@@ -40,25 +40,22 @@ class UserAdressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->persist($address);
             $em->flush();
 
             return $this->redirectToRoute('user_address');
         }
 
-        return $this->render('user/user_adress/useradressadd.html.twig', [
+        return $this->render('user/user_address/useraddressadd.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/user/adress/edit/{id}", name="user_adress_edit")
+     * @Route("/user/address/edit/{id}", name="user_address_edit")
      */
-    public function edit($id, Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $em, Address $address): Response
     {
-        $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
         $user = $this->getUser();
 
         // verification if user request the modification is the owner of the adress
@@ -74,24 +71,22 @@ class UserAdressController extends AbstractController
     
             if ($form->isSubmitted() && $form->isValid() && $address->getUser() == $user )
             {
-                $em = $this->getDoctrine()->getManager();
                 $em->flush();
     
                 return $this->redirectToRoute('user_address');
             }
     
-            return $this->render('user/user_adress/useradressedit.html.twig', [
+            return $this->render('user/user_address/useraddressedit.html.twig', [
                 'form' => $form->createView()
             ]);
         }
     }
 
     /**
-     * @Route("/user/adress/delete/{id}", name="user_adress_delete")
+     * @Route("/user/address/delete/{id}", name="user_address_delete")
      */
-    public function delete($id): Response
+    public function delete(EntityManagerInterface $em, Address $address): Response
     {
-        $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
         $user = $this->getUser();
 
         // verification if user request the suppression is the owner of the adress
@@ -101,7 +96,6 @@ class UserAdressController extends AbstractController
         }
         else
         {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($address);
             $em->flush();
 

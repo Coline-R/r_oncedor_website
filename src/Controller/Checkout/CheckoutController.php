@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Checkout;
 
-use App\Entity\Address;
 use App\Entity\Order;
 use App\Entity\OrderLine;
-use App\Entity\Product;
-use App\Entity\User;
 use App\Repository\AddressRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,7 +50,7 @@ class CheckoutController extends AbstractController
             return $this->redirectToRoute('checkout_recap');
         }  
 
-        return $this->render('checkout/checkout.html.twig', [
+        return $this->render('checkout/checkout/checkout.html.twig', [
             'addresses' => $addresses,
             'form' => $form->createView()
         ]);
@@ -64,7 +62,6 @@ class CheckoutController extends AbstractController
     public function recap(SessionInterface $session, ProductRepository $productRepo): Response
     {
         $deliverAddress = $session->get('deliverAddress', []);
-        $productRepo = $this->getDoctrine()->getRepository(Product::class);
         
         $orderCart = $session->get('cart', []);
 
@@ -82,7 +79,7 @@ class CheckoutController extends AbstractController
             $totalCartPrice += $product->getPrice() * $quantity;
         }
 
-        return $this->render('checkout/recap.html.twig', [
+        return $this->render('checkout/checkout/recap.html.twig', [
             'deliverAdress' => $deliverAddress,
             'orderCart' => $cartData
         ]);
@@ -137,10 +134,8 @@ class CheckoutController extends AbstractController
     /**
      * @Route("/checkout/success", name="checkout_success")
      */
-    public function success(SessionInterface $session, ProductRepository $productRepo, AddressRepository $addressRepo, OrderRepository $orderRepo): Response
+    public function success(SessionInterface $session, ProductRepository $productRepo, AddressRepository $addressRepo, OrderRepository $orderRepo, EntityManagerInterface $em): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
         // register order in database
         $order = new Order;
 
@@ -171,6 +166,7 @@ class CheckoutController extends AbstractController
         for ($i = 0 ; $i < count($cartData) ; $i++) {
             if ($cartData[$i]['quantity'] == 1) {
                 $orderLine = new OrderLine;
+
                 $productId = $productRepo->find($cartData[$i]['product']->getId());
                 $orderLine->setProduct($productId);
                 $orderLine->setCommand($orderId);
@@ -192,7 +188,7 @@ class CheckoutController extends AbstractController
         }
         
 
-        return $this->render('checkout/checkout_success.html.twig');
+        return $this->render('checkout/checkout/checkout_success.html.twig');
     }
 
     /**
@@ -200,6 +196,6 @@ class CheckoutController extends AbstractController
      */
     public function cancel(): Response
     {
-        return $this->render('checkout/checkout_cancel.html.twig');
+        return $this->render('checkout/checkout/checkout_cancel.html.twig');
     }
 }

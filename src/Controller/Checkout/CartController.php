@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Checkout;
 
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,7 +33,7 @@ class CartController extends AbstractController
 
 
 
-        return $this->render('cart/cart.html.twig', [
+        return $this->render('checkout/cart/cart.html.twig', [
             'items' => $cartData,
             'totalCartPrice' => $totalCartPrice
         ]);

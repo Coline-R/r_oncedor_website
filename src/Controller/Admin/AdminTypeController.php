@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Type;
 use App\Form\TypeType;
+use App\Repository\TypeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +16,9 @@ class AdminTypeController extends AbstractController
     /**
      * @Route("/admin/type", name="admin_type")
      */
-    public function index(): Response
+    public function index(TypeRepository $typeRepo): Response
     {
-        // Fetch all types for display
-        $types = $this->getDoctrine()->getRepository(Type::class)->findAll();
+        $types = $typeRepo->findAll();
 
         return $this->render('admin/admin_type/type.html.twig', [
             'types' => $types
@@ -27,7 +28,7 @@ class AdminTypeController extends AbstractController
      /**
      * @Route("/admin/type/add", name="admin_type_add")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, EntityManagerInterface $em): Response
     {
         $type = new Type;
 
@@ -37,8 +38,6 @@ class AdminTypeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->persist($type);
             $em->flush();
 
@@ -53,19 +52,14 @@ class AdminTypeController extends AbstractController
     /**
      * @Route("/admin/type/edit/{id}", name="admin_type_edit")
      */
-    public function edit($id, Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $em, Type $type): Response
     {
-        // Fetch type by ID for modification
-        $type = $this->getDoctrine()->getRepository(Type::class)->find($id);
-
         $form = $this->createForm(TypeType::class, $type);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->flush();
 
             return $this->redirectToRoute('admin_type');
@@ -79,13 +73,8 @@ class AdminTypeController extends AbstractController
     /**
      * @Route("/admin/type/delete/{id}", name="admin_type_delete")
      */
-    public function delete($id)
+    public function delete(EntityManagerInterface $em, Type $type)
     {
-        // Fetch type by ID for delete
-        $type = $this->getDoctrine()->getRepository(Type::class)->find($id);
-
-        $em = $this->getDoctrine()->getManager();
-
         $em->remove($type);
         $em->flush();
 

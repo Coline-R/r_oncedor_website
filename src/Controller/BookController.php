@@ -12,14 +12,10 @@ class BookController extends AbstractController
     /**
      * @Route("/book/{id}", name="book")
      */
-    public function index($id): Response
+    public function index(Product $product): Response
     {
-        $book = $this->getDoctrine()->getManager()->getRepository(Product::class)->find($id);
-
-        dump($book);
-
         return $this->render('book/book.html.twig', [
-            'book' => $book
+            'book' => $product
         ]);
     }
 }

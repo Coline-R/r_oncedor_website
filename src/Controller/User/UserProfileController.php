@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Form\UserProfileType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,7 @@ class UserProfileController extends AbstractController
     /**
      * @Route("/user/profile/edit", name="user_profile_edit")
      */
-    public function edit(Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $em): Response
     {
    
         $form = $this->createForm(UserProfileType::class, $this->getUser());
@@ -30,8 +31,6 @@ class UserProfileController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->flush();
 
             return $this->redirectToRoute('user_profile');
