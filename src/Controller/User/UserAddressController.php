@@ -3,7 +3,6 @@
 namespace App\Controller\User;
 
 use App\Entity\Address;
-use App\Entity\User;
 use App\Form\AddressType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,22 +10,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UserAdressController extends AbstractController
+class UserAddressController extends AbstractController
 {
     /**
-     * @Route("/user/adress", name="user_address")
+     * @Route("/user/address", name="user_address")
      */
     public function index(): Response
     {   
         $user = $this->getUser();
-        $adresses = $user->getAddresses();
-        return $this->render('user/user_adress/useradress.html.twig', [
-            'adresses' => $adresses
+        $addresses = $user->getAddresses();
+        return $this->render('user/user_address/useraddress.html.twig', [
+            'addresses' => $addresses
         ]);
     }
 
     /**
-     * @Route("/user/adress/add", name="user_address_add")
+     * @Route("/user/address/add", name="user_address_add")
      */
     public function add(Request $request, EntityManagerInterface $em): Response
     {
@@ -47,13 +46,13 @@ class UserAdressController extends AbstractController
             return $this->redirectToRoute('user_address');
         }
 
-        return $this->render('user/user_adress/useradressadd.html.twig', [
+        return $this->render('user/user_address/useraddressadd.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/user/adress/edit/{id}", name="user_adress_edit")
+     * @Route("/user/address/edit/{id}", name="user_address_edit")
      */
     public function edit(Request $request, EntityManagerInterface $em, Address $address): Response
     {
@@ -77,14 +76,14 @@ class UserAdressController extends AbstractController
                 return $this->redirectToRoute('user_address');
             }
     
-            return $this->render('user/user_adress/useradressedit.html.twig', [
+            return $this->render('user/user_address/useraddressedit.html.twig', [
                 'form' => $form->createView()
             ]);
         }
     }
 
     /**
-     * @Route("/user/adress/delete/{id}", name="user_adress_delete")
+     * @Route("/user/address/delete/{id}", name="user_address_delete")
      */
     public function delete(EntityManagerInterface $em, Address $address): Response
     {

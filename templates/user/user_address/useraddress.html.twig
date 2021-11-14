@@ -17,16 +17,16 @@
     <h2>Mes adresses</h2>
 
     <div>
-        {% for adress in adresses %}
+        {% for address in addresses %}
         <div>
-            {{ adress.name }}
-            {{ adress.lineOne }}
-            {{ adress.lineTwo }}
-            {{ adress.postalCode }}
-            {{ adress.city }}
-            {{ adress.country }}
-            <a href="{{ path('user_adress_edit', {id: adress.id}) }}">Modifier</a>
-            <a href="{{ path('user_adress_delete', {id: adress.id}) }}">Supprimer</a>
+            {{ address.name }}
+            {{ address.lineOne }}
+            {{ address.lineTwo }}
+            {{ address.postalCode }}
+            {{ address.city }}
+            {{ address.country }}
+            <a href="{{ path('user_address_edit', {id: address.id}) }}">Modifier</a>
+            <a href="{{ path('user_address_delete', {id: address.id}) }}">Supprimer</a>
         </div>
         {% endfor %}
     </div>
