@@ -36,7 +36,7 @@
                                 <th>{{type.name}}</th>
                                 <th>
                                     <a href="{{ path('admin_type_edit', { id: type.id }) }}" class="btn_link">Editer</a>
-                                    <a href="{{ path('admin_type_delete', { id: type.id }) }}" class="btn_link">Supprimer</a>
+                                    <a href="{{ path('admin_type_delete', { id: type.id }) }}" class="btn_link" onclick="return confirm('Etes vous sûre de vouloir supprimer {{type.name}} ? ')">Supprimer</a>
                                 </th>
                             </tr>
                         {% endfor %}

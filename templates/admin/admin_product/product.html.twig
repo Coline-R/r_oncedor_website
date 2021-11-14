@@ -47,7 +47,7 @@
                                 <th>{{product.tome}}</th>
                                 <th>
                                     <a href="{{ path('admin_product_edit', { id: product.id }) }}" class="btn_link">Editer</a>
-                                    <a href="{{ path('admin_product_delete', { id: product.id }) }}" class="btn_link">Supprimer</a>
+                                    <a href="{{ path('admin_product_delete', { id: product.id }) }}" class="btn_link" onclick="return confirm('Etes vous sûre de vouloir supprimer ce produit : {{product.name}} ? ')">Supprimer</a>
                                 </th>
                             </tr>
                         {% endfor %}
