@@ -52,7 +52,7 @@ class CheckoutController extends AbstractController
             return $this->redirectToRoute('checkout_recap');
         }  
 
-        return $this->render('checkout/checkout.html.twig', [
+        return $this->render('checkout/checkout/checkout.html.twig', [
             'addresses' => $addresses,
             'form' => $form->createView()
         ]);
@@ -82,7 +82,7 @@ class CheckoutController extends AbstractController
             $totalCartPrice += $product->getPrice() * $quantity;
         }
 
-        return $this->render('checkout/recap.html.twig', [
+        return $this->render('checkout/checkout/recap.html.twig', [
             'deliverAdress' => $deliverAddress,
             'orderCart' => $cartData
         ]);
@@ -192,7 +192,7 @@ class CheckoutController extends AbstractController
         }
         
 
-        return $this->render('checkout/checkout_success.html.twig');
+        return $this->render('checkout/checkout/checkout_success.html.twig');
     }
 
     /**
@@ -200,6 +200,6 @@ class CheckoutController extends AbstractController
      */
     public function cancel(): Response
     {
-        return $this->render('checkout/checkout_cancel.html.twig');
+        return $this->render('checkout/checkout/checkout_cancel.html.twig');
     }
 }
