@@ -16,7 +16,8 @@
 
     <h2>Mes commandes</h2>
 
-    <div class="user_block">
+    <div class="admin_block">
+        {% include 'user/user_includes/_user_menu.html.twig' %}
         {% for order in orders %}
         <div>
             <p>Numéro de commande : {{ order.id }}</p>
@@ -25,6 +26,7 @@
             <a href="#">Voir les détails</a>
         </div>
         {% endfor %}
+
     </div>
 </main>
 {% endblock %}

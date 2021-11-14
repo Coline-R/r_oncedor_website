@@ -16,7 +16,8 @@
 
     <h2>Mes informations</h2>
 
-    <div class="user_block">
+    <div class="admin_block">
+        {% include 'user/user_includes/_user_menu.html.twig' %}
         <div>
             <p>Prénom : {{ app.user.firstname }}</p>
             <p>Nom : {{ app.user.lastname }}</p>
