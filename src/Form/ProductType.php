@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,19 +23,24 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => "Nom"
+                'label' => "Nom",
+                'attr' => ['placeholder' => 'Nom du produit']
             ])
             ->add('description', TextareaType::class, [
-                'label' => "Description"
+                'label' => "Description",
+                'attr' => ['placeholder' => 'Description du produit']
             ])
             ->add('summary', TextareaType::class, [
-                'label' => "Résumé"
+                'label' => "Résumé",
+                'attr' => ['placeholder' => 'Résumé du livre']
             ])
             ->add('price', NumberType::class, [
-                'label' => "Prix"
+                'label' => "Prix",
+                'attr' => ['placeholder' => 'Prix du produit']
             ] )
             ->add('tome', NumberType::class, [
-                'label' => "Tome"
+                'label' => "Tome",
+                'attr' => ['placeholder' => 'NUméro de tome']
             ])
             ->add('type', EntityType::class, [
                 'label' => 'Type',
@@ -53,6 +59,9 @@ class ProductType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class, [
                 'required' => false
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Enregistrer'
             ])
         ;
     }
