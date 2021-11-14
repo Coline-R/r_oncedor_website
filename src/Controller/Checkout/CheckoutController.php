@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Checkout;
 
 use App\Entity\Address;
 use App\Entity\Order;
