@@ -16,17 +16,21 @@
 
     <h2>Mes adresses</h2>
 
-    <div>
-        {% for address in addresses %}
+    <div class="admin_block">
+        {% include 'user/user_includes/_user_menu.html.twig' %}
         <div>
-            {{ address.name }}
-            {{ address.lineOne }}
-            {{ address.lineTwo }}
-            {{ address.postalCode }}
-            {{ address.city }}
-            {{ address.country }}
-            <a href="{{ path('user_address_edit', {id: address.id}) }}">Modifier</a>
-            <a href="{{ path('user_address_delete', {id: address.id}) }}" onclick="return confirm('Etes vous sûre de vouloir supprimer cette adresse : {{address.name}} ? ')">Supprimer</a>
+            {% for address in addresses %}
+            <div>
+                {{ address.name }}
+                {{ address.lineOne }}
+                {{ address.lineTwo }}
+                {{ address.postalCode }}
+                {{ address.city }}
+                {{ address.country }}
+                <a href="{{ path('user_address_edit', {id: address.id}) }}">Modifier</a>
+                <a href="{{ path('user_address_delete', {id: address.id}) }}"
+                    onclick="return confirm('Etes vous sûre de vouloir supprimer cette adresse : {{address.name}} ? ')">Supprimer</a>
+            </div>
         </div>
         {% endfor %}
     </div>
