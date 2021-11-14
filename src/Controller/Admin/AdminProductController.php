@@ -7,6 +7,7 @@ use App\Entity\Product;
 use App\Entity\Type;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,9 @@ class AdminProductController extends AbstractController
     /**
      * @Route("/admin/product", name="admin_product")
      */
-    public function index(): Response
+    public function index(ProductRepository $productRepo): Response
     {
-        // Fetch all products for display
-        $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
+        $products = $productRepo->findAll();
 
         return $this->render('admin/admin_product/product.html.twig', [
             'products' => $products
@@ -31,7 +31,7 @@ class AdminProductController extends AbstractController
      /**
      * @Route("/admin/product/add", name="admin_product_add")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, EntityManagerInterface $em): Response
     {
         $product = new Product;
         $product->setIsPreorder(false);
@@ -42,8 +42,6 @@ class AdminProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->persist($product);
             $em->flush();
 
@@ -58,19 +56,14 @@ class AdminProductController extends AbstractController
      /**
      * @Route("/admin/product/edit/{id}", name="admin_product_edit")
      */
-    public function edit($id, Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $em, Product $product): Response
     {
-        // Fetch product by ID for modification
-        $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
-
         $form = $this->createForm(ProductType::class, $product);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->flush();
 
             return $this->redirectToRoute('admin_product');
@@ -84,13 +77,8 @@ class AdminProductController extends AbstractController
     /**
      * @Route("/admin/product/delete/{id}", name="admin_product_delete")
      */
-    public function delete($id)
+    public function delete(EntityManagerInterface $em, Product $product)
     {
-        // Fetch prodduct by ID for delete
-        $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
-
-        $em = $this->getDoctrine()->getManager();
-
         $em->remove($product);
         $em->flush();
 

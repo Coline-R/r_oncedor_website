@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Opinion;
 use App\Form\OpinionType;
+use App\Repository\OpinionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +16,9 @@ class AdminOpinionController extends AbstractController
     /**
      * @Route("/admin/opinion", name="admin_opinion")
      */
-    public function index(): Response
+    public function index(OpinionRepository $opinionRepo): Response
     {
-        // Fetch all opinions for display
-        $opinions = $this->getDoctrine()->getRepository(Opinion::class)->findAll();
+        $opinions = $opinionRepo->findAll();
 
         return $this->render('admin/admin_opinion/opinion.html.twig', [
             'opinions' => $opinions
@@ -27,7 +28,7 @@ class AdminOpinionController extends AbstractController
      /**
      * @Route("/admin/opinion/add", name="admin_opinion_add")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, EntityManagerInterface $em): Response
     {
         $opinion = new Opinion;
 
@@ -37,8 +38,6 @@ class AdminOpinionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->persist($opinion);
             $em->flush();
 
@@ -53,19 +52,14 @@ class AdminOpinionController extends AbstractController
      /**
      * @Route("/admin/opinion/edit/{id}", name="admin_opinion_edit")
      */
-    public function edit($id, Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $em, Opinion $opinion): Response
     {
-        // Fetch opinion by ID for modification
-        $opinion = $this->getDoctrine()->getRepository(Opinion::class)->find($id);
-
         $form = $this->createForm(OpinionType::class, $opinion);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->flush();
 
             return $this->redirectToRoute('admin_opinion');
@@ -79,13 +73,8 @@ class AdminOpinionController extends AbstractController
     /**
      * @Route("/admin/opinion/delete/{id}", name="admin_opinion_delete")
      */
-    public function delete($id)
+    public function delete(EntityManagerInterface $em, Opinion $opinion)
     {
-        // Fetch opinion by ID for delete
-        $opinion = $this->getDoctrine()->getRepository(Opinion::class)->find($id);
-
-        $em = $this->getDoctrine()->getManager();
-
         $em->remove($opinion);
         $em->flush();
 

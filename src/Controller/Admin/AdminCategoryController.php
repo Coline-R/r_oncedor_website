@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +16,9 @@ class AdminCategoryController extends AbstractController
      /**
      * @Route("/admin/category", name="admin_category")
      */
-    public function index(): Response
+    public function index(CategoryRepository $categoryRepo): Response
     {
-        // Fetch all categories for display
-        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $categories = $categoryRepo->findAll();
 
         return $this->render('admin/admin_category/category.html.twig', [
             'categories' => $categories
@@ -27,7 +28,7 @@ class AdminCategoryController extends AbstractController
      /**
      * @Route("/admin/category/add", name="admin_category_add")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, EntityManagerInterface $em): Response
     {
         $category = new Category;
 
@@ -37,8 +38,6 @@ class AdminCategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->persist($category);
             $em->flush();
 
@@ -53,19 +52,14 @@ class AdminCategoryController extends AbstractController
     /**
      * @Route("/admin/category/edit/{id}", name="admin_category_edit")
      */
-    public function edit($id, Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $em, Category $category): Response
     {
-        // Fetch category by ID for modification
-        $category= $this->getDoctrine()->getRepository(Category::class)->find($id);
-
         $form = $this->createForm(CategoryType::class, $category);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->flush();
 
             return $this->redirectToRoute('admin_category');
@@ -79,13 +73,8 @@ class AdminCategoryController extends AbstractController
     /**
      * @Route("/admin/category/delete/{id}", name="admin_category_delete")
      */
-    public function delete($id)
+    public function delete(Category $category, EntityManagerInterface $em)
     {
-        // Fetch category by ID for delete
-        $category = $this->getDoctrine()->getRepository(Category::class)->find($id);
-
-        $em = $this->getDoctrine()->getManager();
-
         $em->remove($category);
         $em->flush();
 

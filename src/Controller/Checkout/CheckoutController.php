@@ -2,15 +2,13 @@
 
 namespace App\Controller\Checkout;
 
-use App\Entity\Address;
 use App\Entity\Order;
 use App\Entity\OrderLine;
-use App\Entity\Product;
-use App\Entity\User;
 use App\Repository\AddressRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,7 +62,6 @@ class CheckoutController extends AbstractController
     public function recap(SessionInterface $session, ProductRepository $productRepo): Response
     {
         $deliverAddress = $session->get('deliverAddress', []);
-        $productRepo = $this->getDoctrine()->getRepository(Product::class);
         
         $orderCart = $session->get('cart', []);
 
@@ -137,10 +134,8 @@ class CheckoutController extends AbstractController
     /**
      * @Route("/checkout/success", name="checkout_success")
      */
-    public function success(SessionInterface $session, ProductRepository $productRepo, AddressRepository $addressRepo, OrderRepository $orderRepo): Response
+    public function success(SessionInterface $session, ProductRepository $productRepo, AddressRepository $addressRepo, OrderRepository $orderRepo, EntityManagerInterface $em): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
         // register order in database
         $order = new Order;
 
@@ -171,6 +166,7 @@ class CheckoutController extends AbstractController
         for ($i = 0 ; $i < count($cartData) ; $i++) {
             if ($cartData[$i]['quantity'] == 1) {
                 $orderLine = new OrderLine;
+
                 $productId = $productRepo->find($cartData[$i]['product']->getId());
                 $orderLine->setProduct($productId);
                 $orderLine->setCommand($orderId);

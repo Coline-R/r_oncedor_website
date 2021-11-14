@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Edition;
 use App\Form\EditionType;
+use App\Repository\EditionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +16,9 @@ class AdminEditionController extends AbstractController
      /**
      * @Route("/admin/edition", name="admin_edition")
      */
-    public function index(): Response
+    public function index(EditionRepository $editionRepo): Response
     {
-        // Fetch all editions for display
-        $editions = $this->getDoctrine()->getRepository(Edition::class)->findAll();
+        $editions = $editionRepo->findAll();
 
         return $this->render('admin/admin_edition/edition.html.twig', [
             'editions' => $editions
@@ -27,7 +28,7 @@ class AdminEditionController extends AbstractController
      /**
      * @Route("/admin/edition/add", name="admin_edition_add")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, EntityManagerInterface $em): Response
     {
         $edition = new Edition;
 
@@ -37,8 +38,6 @@ class AdminEditionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->persist($edition);
             $em->flush();
 
@@ -53,11 +52,8 @@ class AdminEditionController extends AbstractController
     /**
      * @Route("/admin/edition/edit/{id}", name="admin_edition_edit")
      */
-    public function edit($id, Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $em, Edition $edition): Response
     {
-        // Fetch edition by ID for modification
-        $edition = $this->getDoctrine()->getRepository(Edition::class)->find($id);
-
         $form = $this->createForm(EditionType::class, $edition);
 
         $form->handleRequest($request);
@@ -79,13 +75,8 @@ class AdminEditionController extends AbstractController
     /**
      * @Route("/admin/edition/delete/{id}", name="admin_edition_delete")
      */
-    public function delete($id)
+    public function delete(EntityManagerInterface $em, Edition $edition)
     {
-        // Fetch edition by ID for delete
-        $edition = $this->getDoctrine()->getRepository(Edition::class)->find($id);
-
-        $em = $this->getDoctrine()->getManager();
-
         $em->remove($edition);
         $em->flush();
 

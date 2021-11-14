@@ -2,6 +2,7 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Order;
 use App\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,9 +26,8 @@ class UserOrderController extends AbstractController
     /**
      * @Route("/user/order/details/{id}", name="user_order_details")
      */
-    public function details($id, OrderRepository $orderRepo): Response
+    public function details(Order $order): Response
     {
-        $order = $orderRepo->find($id);
         $orderLines = $order->getOrderLines();
 
         return $this->render('/user/user_order/userorderdetails.html.twig', [

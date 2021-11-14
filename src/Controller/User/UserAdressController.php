@@ -5,6 +5,7 @@ namespace App\Controller\User;
 use App\Entity\Address;
 use App\Entity\User;
 use App\Form\AddressType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,7 @@ class UserAdressController extends AbstractController
     /**
      * @Route("/user/adress/add", name="user_address_add")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, EntityManagerInterface $em): Response
     {
         // create new adress and set current connected user owner of the adress
         $address = new Address;
@@ -40,8 +41,6 @@ class UserAdressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
-
             $em->persist($address);
             $em->flush();
 
@@ -56,9 +55,8 @@ class UserAdressController extends AbstractController
     /**
      * @Route("/user/adress/edit/{id}", name="user_adress_edit")
      */
-    public function edit($id, Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $em, Address $address): Response
     {
-        $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
         $user = $this->getUser();
 
         // verification if user request the modification is the owner of the adress
@@ -74,7 +72,6 @@ class UserAdressController extends AbstractController
     
             if ($form->isSubmitted() && $form->isValid() && $address->getUser() == $user )
             {
-                $em = $this->getDoctrine()->getManager();
                 $em->flush();
     
                 return $this->redirectToRoute('user_address');
@@ -89,9 +86,8 @@ class UserAdressController extends AbstractController
     /**
      * @Route("/user/adress/delete/{id}", name="user_adress_delete")
      */
-    public function delete($id): Response
+    public function delete(EntityManagerInterface $em, Address $address): Response
     {
-        $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
         $user = $this->getUser();
 
         // verification if user request the suppression is the owner of the adress
@@ -101,7 +97,6 @@ class UserAdressController extends AbstractController
         }
         else
         {
-            $em = $this->getDoctrine()->getManager();
             $em->remove($address);
             $em->flush();
 

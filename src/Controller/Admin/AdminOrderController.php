@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Order;
 use App\Repository\OrderRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,9 +28,8 @@ class AdminOrderController extends AbstractController
     /**
      * @Route("/admin/order/details/{id}", name="admin_order_details")
      */
-    public function details($id, OrderRepository $orderRepo): Response
+    public function details(Order $order): Response
     {
-        $order = $orderRepo->find($id);
         $orderLines = $order->getOrderLines();
 
         return $this->render('admin/admin_order/adminorderdetails.html.twig', [
@@ -39,11 +40,8 @@ class AdminOrderController extends AbstractController
     /**
      * @Route("/admin/order/shipping/{id}", name="admin_order_shipping")
      */
-    public function shipping($id, OrderRepository $orderRepo): Response
+    public function shipping(Order $order, EntityManagerInterface $em): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $order = $orderRepo->find($id);
         $order->setIsShipped(true);
         $em->flush($order);
 
