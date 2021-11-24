@@ -41,6 +41,11 @@ class AdminOpinionController extends AbstractController
             $em->persist($opinion);
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'L\'ajout de l\'avis lecteur a bien été effectué'
+            );
+
             return $this->redirectToRoute('admin_opinion');
         }
 
@@ -62,6 +67,11 @@ class AdminOpinionController extends AbstractController
         {
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'La modification de l\'avis lecteur a bien été effectué'
+            );
+
             return $this->redirectToRoute('admin_opinion');
         }
 
@@ -77,6 +87,11 @@ class AdminOpinionController extends AbstractController
     {
         $em->remove($opinion);
         $em->flush();
+
+        $this->addFlash(
+            'info',
+            'La suppression de l\'avis lecteur a bien été effectué'
+        );
 
         return $this->redirectToRoute('admin_opinion');
     }
