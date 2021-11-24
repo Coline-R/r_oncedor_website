@@ -41,6 +41,11 @@ class AdminCategoryController extends AbstractController
             $em->persist($category);
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'L\'ajout de la catégorie a bien été effectué'
+            );
+
             return $this->redirectToRoute('admin_category');
         }
 
@@ -62,6 +67,11 @@ class AdminCategoryController extends AbstractController
         {
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'La modification de la catégorie a bien été effectué'
+            );
+
             return $this->redirectToRoute('admin_category');
         }
 
@@ -77,6 +87,11 @@ class AdminCategoryController extends AbstractController
     {
         $em->remove($category);
         $em->flush();
+
+        $this->addFlash(
+            'info',
+            'La suppression de la catégorie a bien été effectué'
+        );
 
         return $this->redirectToRoute('admin_category');
     }
