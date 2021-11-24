@@ -41,6 +41,11 @@ class AdminEditionController extends AbstractController
             $em->persist($edition);
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'L\'ajout de l\'édition a bien été effectué'
+            );
+
             return $this->redirectToRoute('admin_edition');
         }
 
@@ -64,6 +69,12 @@ class AdminEditionController extends AbstractController
 
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'La modification de l\'édition a bien été effectué'
+            );
+
+
             return $this->redirectToRoute('admin_edition');
         }
 
@@ -79,6 +90,12 @@ class AdminEditionController extends AbstractController
     {
         $em->remove($edition);
         $em->flush();
+
+        $this->addFlash(
+            'info',
+            'La suppression de l\'édition a bien été effectué'
+        );
+
 
         return $this->redirectToRoute('admin_edition');
     }
