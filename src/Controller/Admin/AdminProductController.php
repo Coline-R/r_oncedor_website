@@ -45,6 +45,11 @@ class AdminProductController extends AbstractController
             $em->persist($product);
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'L\'ajout du produit a bien été effectué'
+            );
+
             return $this->redirectToRoute('admin_product');
         }
 
@@ -66,6 +71,11 @@ class AdminProductController extends AbstractController
         {
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'La modification du produit a bien été effectué'
+            );
+
             return $this->redirectToRoute('admin_product');
         }
 
@@ -81,6 +91,11 @@ class AdminProductController extends AbstractController
     {
         $em->remove($product);
         $em->flush();
+
+        $this->addFlash(
+            'info',
+            'La supression du produit a bien été effectué'
+        );
 
         return $this->redirectToRoute('admin_product');
     }
