@@ -12,9 +12,15 @@
         <a href="#" class="active">Contact</a>
     </div>
 
-    {# LogIn form #}
     <div class="form_block">
         <h1>Contact</h1>
+
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+
         {{ form_start(form) }}
             {{ form_row(form.name) }}
             {{ form_row(form.email) }}
