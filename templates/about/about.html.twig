@@ -1,30 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block bodyclass %}{% endblock %}
-
+{% block title %}A propos - R. Oncedor{% endblock %}
 
 {% block main %}
     <!-- MAIN -->
     <main class="main" role="main">
         <!-- breadcrumb's Thread -->
         <div class="breadcrumb_thread">
-            <a href="#">Accueil</a>
+            <a href="{{ path('home') }}">Accueil</a>
             <p>></p>
             <a href="#" class="active">A propos</a>
         </div>
 
         <div class="about">
-            <h2>A propos</h2>
-            <div>
+            <h1>R. Oncedor</h1>
+
+            <div class="presentation">
                 <img src="{{ asset('pictures/author.jpg') }}" alt="Portrait de l'autrice, R. Oncedor">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos repudiandae repellat ipsum, possimus
-                    tempore, saepe error expedita voluptatum nam sequi dolore ratione quia? Harum hic, quaerat ab
-                    obcaecati id fugit quos sit voluptates, in doloribus atque ducimus.
-                    Quas nihil aperiam doloribus molestiae aliquam dolore reiciendis necessitatibus ducimus? Nemo
-                    molestiae ab placeat nesciunt explicabo ducimus inventore pariatur, iste amet odio maxime dicta
-                    natus illo unde nostrum nisi dolor libero deleniti aliquid! Suscipit alias vero illo neque commodi
-                    consequatur cumque saepe laborum laboriosam enim.
-                </p>
+                <div>
+                    <h2>Présentation</h2>
+                    <p>
+                        Fille de botaniste, .R. Oncedor a grandi dans les montagnes d'Auvergne.
+                    </p>
+                    <p>
+                        Après des études d'art, elle s'installe à Nantes où elle dessine des créatures imaginaires et écrit des récits étranges.
+                    </p>
+                    <p>
+                        Autrice originaire de Scribay, elle a fait ses premières armes sur le forum Encre Nocturne.
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <h2>Liens sociaux</h2>
+                <div class="social">
+                    <div>
+                        <img src="{{ asset('pictures/newsletter.svg') }}" alt="Logo enveloppe pour la newsletter">
+                        <a href="https://15e591f3.sibforms.com/serve/MUIEAArx6tQwDid0zIcyq5PTg5WGFgeLrVFpEVhCXNW-NH8s80kG-rZqIBHUNkA-OVMF31JKUVTREJQreo07tGP4SyoylTVZUd54dMNMa22niJV6M3aeAoycPUglvMZV4n581-IC9Cxdie-E37UiolHa9ycbYe7ZoR5--hNK6mYU8p6KvH1FEMCSLlFfUl4kCv3CUq9JVyG2dipw">Newsletter</a>
+                    </div>
+                    <div>
+                        <img src="{{ asset('pictures/instagram.svg') }}" alt="Logo d'Instagram">
+                        <a href="https://www.instagram.com/roncedor/">Compte Instagram</a>
+                    </div>
+                    <div>
+                        <img src="{{ asset('pictures/pen.svg') }}" alt="Logo de stylo-plume">
+                        <a href="https://www.scribay.com/author/1921084357/cornedor">Compte Scribay</a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
