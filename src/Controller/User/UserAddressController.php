@@ -43,6 +43,11 @@ class UserAddressController extends AbstractController
             $em->persist($address);
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'Votre adresse a bien été ajouté !'
+            );
+
             return $this->redirectToRoute('user_address');
         }
 
@@ -72,6 +77,11 @@ class UserAddressController extends AbstractController
             if ($form->isSubmitted() && $form->isValid() && $address->getUser() == $user )
             {
                 $em->flush();
+
+                $this->addFlash(
+                    'info',
+                    'Votre adresse a bien été modifié !'
+                );
     
                 return $this->redirectToRoute('user_address');
             }
@@ -98,6 +108,11 @@ class UserAddressController extends AbstractController
         {
             $em->remove($address);
             $em->flush();
+
+            $this->addFlash(
+                'info',
+                'Votre adresse a bien été supprimé !'
+            );
 
             return $this->redirectToRoute('user_address');
         }
