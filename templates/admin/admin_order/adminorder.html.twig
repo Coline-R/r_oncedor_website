@@ -22,22 +22,53 @@
         </div>
     {% endfor %}
 
-    <div>
-        <h2>Commandes non expédiées</h2>
-        <div>
-            {% for order in noShippedOrder %}
-            {{order.id}}
-            {{order.address.name}}
-            <a href="{{ path('admin_order_details', {id:order.id}) }}">Détails</a>
-            <a href="{{ path('admin_order_shipping', {id:order.id}) }}">Marquer comme expédiée</a>
-            {% endfor %}
+    <div class="admin_block">
+        {% include 'admin/admin_includes/_admin_menu.html.twig' %}
+        <div class="admin_content">
+            <h2>Commandes non expédiées</h2>
+            <table>
+                <thead>
+                    <td>Numéro de commande</td>
+                    <td>Nom du client</td>
+                    <td>Date de commande</td>
+                    <td>Actions</td>
+                </thead>
+                <tbody>
+                    {% for order in noShippedOrder %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.user.firstname }} {{ order.user.lastname }}</td>
+                            <td>{{ order.orderDate|date("d/m/Y") }}</td>
+                            <td>
+                                <a href="{{ path('admin_order_details', {id:order.id}) }}" class="btn">Détails</a>
+                                <a href="{{ path('admin_order_shipping', {id:order.id}) }}" class="btn">Marquer comme expédiée</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
     <div>
         <h2>Commandes expédiées</h2>
-        {% for order in shippedOrder %}
-        {{order.id}}
-        {% endfor %}
+        <table>
+            <thead>
+                <td>Numéro de commande</td>
+                <td>Nom du client</td>
+                <td>Date de commande</td>
+                <td>Date d'expédition</td>
+            </thead>
+            <tbody>
+                {% for order in shippedOrder %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.user.firstname }} {{ order.user.lastname }}</td>
+                        <td>{{ order.orderDate|date("d/m/Y") }}</td>
+                        <td>{{ order.shippedDate|date("d/m/Y") }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
 </main>
