@@ -45,6 +45,11 @@ class AdminOrderController extends AbstractController
         $order->setIsShipped(true);
         $em->flush($order);
 
+        $this->addFlash(
+            'info',
+            'La commande a bien été marquée comme envoyé'
+        );
+
         return $this->redirectToRoute('admin_order');
     }
 }

@@ -16,6 +16,12 @@
 
     <h1>Commandes</h1>
 
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+
     <div>
         <h2>Commandes non expédiées</h2>
         <div>

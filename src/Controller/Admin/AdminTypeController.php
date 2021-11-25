@@ -41,6 +41,11 @@ class AdminTypeController extends AbstractController
             $em->persist($type);
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'L\'ajout du type a bien été effectué'
+            );
+
             return $this->redirectToRoute('admin_type');
         }
 
@@ -62,6 +67,11 @@ class AdminTypeController extends AbstractController
         {
             $em->flush();
 
+            $this->addFlash(
+                'info',
+                'La modification du type a bien été effectué'
+            );
+
             return $this->redirectToRoute('admin_type');
         }
 
@@ -77,6 +87,11 @@ class AdminTypeController extends AbstractController
     {
         $em->remove($type);
         $em->flush();
+
+        $this->addFlash(
+            'info',
+            'La suppression du type a bien été effectué'
+        );
 
         return $this->redirectToRoute('admin_type');
     }

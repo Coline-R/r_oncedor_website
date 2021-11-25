@@ -16,6 +16,12 @@
 
         <h1>Gestion des Catégories</h1>
 
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+
         <div class="admin_block">
             {% include 'admin/admin_includes/_admin_menu.html.twig' %}
             <div class="admin_content">

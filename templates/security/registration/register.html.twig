@@ -16,6 +16,12 @@
             <div role="alert">{{ flashError }}</div>
         {% endfor %}
 
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+
         <div class="form_block">
             <h1>Inscription</h1>
 

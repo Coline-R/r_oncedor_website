@@ -14,7 +14,13 @@
         <a href="#" class="active">Mes adresses</a>
     </div>
 
-    <h2>Mes adresses</h2>
+    <h1>Mes adresses</h1>
+
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
 
     <div class="admin_block">
         {% include 'user/user_includes/_user_menu.html.twig' %}

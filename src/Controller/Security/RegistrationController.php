@@ -55,7 +55,12 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('home');
+            $this->addFlash(
+                'info',
+                'Merci de votre inscription ! Vous allez recevoir un mail afin de confirmer votre adresse. N\'hésitez pas à regarder dans votre dossier de spam.'
+            );
+
+            return $this->redirectToRoute('app_register');
         }
 
         return $this->render('security/registration/register.html.twig', [
