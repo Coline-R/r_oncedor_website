@@ -5,8 +5,11 @@ namespace App\Controller\Admin;
 use App\Entity\Order;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminOrderController extends AbstractController
@@ -40,7 +43,7 @@ class AdminOrderController extends AbstractController
     /**
      * @Route("/admin/order/shipping/{id}", name="admin_order_shipping")
      */
-    public function shipping(Order $order, EntityManagerInterface $em): Response
+    public function shipping(Order $order, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         $order->setIsShipped(true);
         $em->flush($order);
@@ -49,6 +52,22 @@ class AdminOrderController extends AbstractController
             'info',
             'La commande a bien été marquée comme envoyé'
         );
+
+         // send order shipping mail to the user
+         $email = (new TemplatedEmail())
+         ->from('no-reply@dev-r-oncedor.fr')
+         ->to(new Address($order->getUser()->getEmail()))
+         ->subject('Expédition de votre commande')
+
+         ->htmlTemplate('admin/admin_order/order_mail/shipping_order.html.twig')
+
+         ->context([
+             'order' => $order,
+             'user' => $order->getUser()
+        ])
+     ;
+
+     $mailer->send($email);
 
         return $this->redirectToRoute('admin_order');
     }

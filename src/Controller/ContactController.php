@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Email;
 
 class ContactController extends AbstractController
 {
@@ -26,15 +25,21 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $contactFormData = $form->getData();
-
-            $message = (new Email())
-                ->from($contactFormData['email'])
-                ->to('contact@roncedor-test.fr')
-                ->subject('Formulaire de contact - Site R. Oncedor')
-                ->text('Emeteur : '.$contactFormData['name'].
-                'Mail de l\'emetteur : '.$contactFormData['email'].$contactFormData['message'],'text/plain');
             
-            $mailer->send($message);
+             // send user's message to the admin
+            $email = (new TemplatedEmail())
+            ->from('contact@dev-r-oncedor.fr')
+            ->to(new Address('test@test.com'))
+            ->subject('Message du formulaire de contact de dev-r-oncedor.fr')
+
+            ->htmlTemplate('contact/contact_mail.html.twig')
+
+            ->context([
+                'formData' => $contactFormData
+            ])
+            ;
+
+            $mailer->send($email);
 
             $this->addFlash(
                 'info',

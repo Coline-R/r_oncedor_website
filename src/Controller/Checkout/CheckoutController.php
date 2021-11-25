@@ -16,6 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Stripe\Stripe;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CheckoutController extends AbstractController
@@ -134,7 +137,7 @@ class CheckoutController extends AbstractController
     /**
      * @Route("/checkout/success", name="checkout_success")
      */
-    public function success(SessionInterface $session, ProductRepository $productRepo, AddressRepository $addressRepo, OrderRepository $orderRepo, EntityManagerInterface $em): Response
+    public function success(SessionInterface $session, ProductRepository $productRepo, AddressRepository $addressRepo, OrderRepository $orderRepo, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         // register order in database
         $order = new Order;
@@ -187,6 +190,18 @@ class CheckoutController extends AbstractController
             }
         }
         
+        // send order confirmation mail to the user
+        $email = (new TemplatedEmail())
+            ->from('no-reply@dev-r-oncedor.fr')
+            ->to(new Address($this->getUser()->getEmail()))
+            ->subject('Confirmation de votre commande')
+
+            ->htmlTemplate('checkout/checkout/confirm_order.html.twig')
+
+            ->context(['order' => $order])
+        ;
+
+        $mailer->send($email);
 
         return $this->render('checkout/checkout/checkout_success.html.twig');
     }
