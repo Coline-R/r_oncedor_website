@@ -1,16 +1,16 @@
 <!-- Admin Menu -->
 <nav class="admin_menu">
-    <h4>Dashboard</h4>
+    <h2>Dashboard</h2>
     <ul>
         <li><a href="{{ path('admin_product') }}">Gestion du site</a></li>
             <ul>
-                <li><a href="{{ path('admin_product') }}">Gestion des produits</a></li>
-                <li><a href="{{ path('admin_opinion') }}">Gestion des avis lecteurs</a></li>
-                <li><a href="{{ path('admin_category') }}">Gestion des catégories</a></li>
-                <li><a href="{{ path('admin_type') }}">Gestion des types</a></li>
-                <li><a href="{{ path('admin_edition') }}">Gestion des éditions</a></li>
+                <li><a href="{{ path('admin_product') }}">> Gestion des produits</a></li>
+                <li><a href="{{ path('admin_opinion') }}">> Gestion des avis lecteurs</a></li>
+                <li><a href="{{ path('admin_category') }}">> Gestion des catégories</a></li>
+                <li><a href="{{ path('admin_type') }}">> Gestion des types</a></li>
+                <li><a href="{{ path('admin_edition') }}">> Gestion des éditions</a></li>
             </ul>
-        <li><a href="#">Gestion des commandes</a></li>
+        <li><a href="{{ path('admin_order') }}">Gestion des commandes</a></li>
         <li><a href="#">Gestion des précommandes</a></li>
     </ul>
 </nav>
