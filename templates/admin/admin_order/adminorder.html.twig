@@ -47,28 +47,26 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <h2>Commandes expédiées</h2>
+            <table>
+                <thead>
+                    <td>Numéro de commande</td>
+                    <td>Nom du client</td>
+                    <td>Date de commande</td>
+                    <td>Date d'expédition</td>
+                </thead>
+                <tbody>
+                    {% for order in shippedOrder %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.user.firstname }} {{ order.user.lastname }}</td>
+                            <td>{{ order.orderDate|date("d/m/Y") }}</td>
+                            <td>{{ order.shippedDate|date("d/m/Y") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-    </div>
-    <div>
-        <h2>Commandes expédiées</h2>
-        <table>
-            <thead>
-                <td>Numéro de commande</td>
-                <td>Nom du client</td>
-                <td>Date de commande</td>
-                <td>Date d'expédition</td>
-            </thead>
-            <tbody>
-                {% for order in shippedOrder %}
-                    <tr>
-                        <td>{{ order.id }}</td>
-                        <td>{{ order.user.firstname }} {{ order.user.lastname }}</td>
-                        <td>{{ order.orderDate|date("d/m/Y") }}</td>
-                        <td>{{ order.shippedDate|date("d/m/Y") }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
 
 </main>
