@@ -54,6 +54,7 @@
                     <td>Nom du client</td>
                     <td>Date de commande</td>
                     <td>Date d'expédition</td>
+                    <td>Action</td>
                 </thead>
                 <tbody>
                     {% for order in shippedOrder %}
@@ -62,6 +63,7 @@
                             <td>{{ order.user.firstname }} {{ order.user.lastname }}</td>
                             <td>{{ order.orderDate|date("d/m/Y") }}</td>
                             <td>{{ order.shippedDate|date("d/m/Y") }}</td>
+                            <td><a href="{{ path('admin_order_details', {id:order.id}) }}" class="btn">Détails</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
