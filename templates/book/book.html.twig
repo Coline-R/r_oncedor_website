@@ -7,26 +7,28 @@
     <main class="main" role="main">
         <!-- breadcrumb's Thread -->
         <div class="breadcrumb_thread">
-            <a href="#">Accueil</a>
+            <a href="{{ path('home') }}">Accueil</a>
             <p>></p>
-            <a href="#">Bibliographie</a>
+            <a href="{{ path("bibliography") }}">Bibliographie</a>
             <p>></p>
             <a href="#" class="active">{{book.name}}</a>
         </div>
-    
-        <div class="about">
-            <h2>{{ book.name }} - {{ book.category.name }} - Tome {{ book.tome }}</h2>
-            <div>
-                <img src="{{ vich_uploader_asset(book, 'imageFile') }}" alt="{{ book.name }}" />
-                <div> 
-                    <h3> Détails </h3>
-                    <p>Edition {{ book.edition.name }}</p>
-                    <p>{{ book.description }}</p>
-                    <h3> Résumé </h3>
-                    <p> {{book.summary}} </p>
-                </div>
 
-            </div>
+        {% if book.tome > 0 %}
+            <h1>{{ book.name }} - {{ book.category.name }} - Tome {{ book.tome }}</h1>
+        {% else %}
+            <h1>{{ book.name }}</h1>
+        {% endif %}
+    
+        <div class="book_presentation">
+                <img src="{{ vich_uploader_asset(book, 'imageFile') }}" alt="Couverture de {{ book.name }}" />
+                <div> 
+                    <h2> Détails </h2>
+                    <p>Edition {{ book.edition.name }}</p>
+                    <p>{{ book.description|nl2br }}</p>
+                    <h2> Résumé </h2>
+                    <p> {{ book.summary|nl2br }} </p>
+                </div>
         </div>
     </main>
 {% endblock %}
