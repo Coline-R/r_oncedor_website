@@ -8,25 +8,29 @@
     <main class="main" role="main">
         <!-- breadcrumb's Thread -->
         <div class="breadcrumb_thread">
-            <a href="#">Accueil</a>
+            <a href="{{ path('home') }}">Accueil</a>
             <p>></p>
             <a href="#" class="active">Bibliographie</a>
         </div>
 
         <div class="bibliography">
-            <h2>Bibliography</h2>
+            <h1>Bibliographie</h1>
             <div class="book_category">
                 <div>
                     {% for book in books %}
                     <div class="book">                        
-                        <img src="{{ vich_uploader_asset(book, 'imageFile') }}" alt="{{ book.name }}" />
-                        <h4>{{ book.name }}</h4>
-                        <p>Tome {{ book.tome }}</p>
+                        <img src="{{ vich_uploader_asset(book, 'imageFile') }}" alt="Couverture de {{ book.name }}" />
+                        <h3>{{ book.name }}</h3>
+                        {% if book.tome > 0 %}
+                            <p>Tome {{ book.tome }}</p>
+                            {% else %}
+                            <p>Stand-alone</p>
+                        {% endif %}
                         <p>Edition {{ book.edition.name }}<p>
-                        <button><a href="{{ path('book', {id: book.id}) }}">En savoir plus</a></button>
+                        <a href="{{ path('book', {id: book.id}) }}" class="btn">En savoir plus</a>
                     </div>
                     {% endfor %}
-                </div>
+            </div>
         </div>
     </main>
 {% endblock %}
