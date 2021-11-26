@@ -26,24 +26,24 @@
             {% include 'admin/admin_includes/_admin_menu.html.twig' %}
             <div class="admin_content">
                 <div>
-                    <a href="{{path('admin_type_add')}}" class="btn_link">ajouter</a>
+                    <a href="{{path('admin_type_add')}}" class="btn">ajouter</a>
                 </div>
                 <table>
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Nom</th>
+                            <td>#</td>
+                            <td>Nom du type</td>
                         </tr>
                     </thead>
                     <tbody>
                         {% for type in types %}
                             <tr>
-                                <th>{{type.id}}</th>
-                                <th>{{type.name}}</th>
-                                <th>
-                                    <a href="{{ path('admin_type_edit', { id: type.id }) }}" class="btn_link">Editer</a>
-                                    <a href="{{ path('admin_type_delete', { id: type.id }) }}" class="btn_link" onclick="return confirm('Etes vous sûre de vouloir supprimer {{type.name}} ? ')">Supprimer</a>
-                                </th>
+                                <td>{{type.id}}</td>
+                                <td>{{type.name}}</td>
+                                <td>
+                                    <a href="{{ path('admin_type_edit', { id: type.id }) }}" class="btn">Editer</a>
+                                    <a href="{{ path('admin_type_delete', { id: type.id }) }}" class="btn" onclick="return confirm('Etes vous sûre de vouloir supprimer {{type.name}} ? ')">Supprimer</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -26,24 +26,25 @@
             {% include 'admin/admin_includes/_admin_menu.html.twig' %}
             <div class="admin_content">
                 <div>
-                    <a href="{{path('admin_category_add')}}" class="btn_link">ajouter</a>
+                    <a href="{{path('admin_category_add')}}" class="btn">ajouter</a>
                 </div>
                 <table>
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Nom</th>
+                            <td>#</td>
+                            <td>Nom de la catégorie</td>
+                            <td>Actions</td>
                         </tr>
                     </thead>
                     <tbody>
                         {% for category in categories %}
                             <tr>
-                                <th>{{category.id}}</th>
-                                <th>{{category.name}}</th>
-                                <th>
-                                    <a href="{{ path('admin_category_edit', { id: category.id }) }}" class="btn_link">Editer</a>
-                                    <a href="{{ path('admin_category_delete', { id: category.id }) }}" class="btn_link" onclick="return confirm('Etes vous sûre de vouloir supprimer {{category.name}} ? ')">Supprimer</a>
-                                </th>
+                                <td>{{category.id}}</td>
+                                <td>{{category.name}}</td>
+                                <td>
+                                    <a href="{{ path('admin_category_edit', { id: category.id }) }}" class="btn">Editer</a>
+                                    <a href="{{ path('admin_category_delete', { id: category.id }) }}" class="btn" onclick="return confirm('Etes vous sûre de vouloir supprimer {{category.name}} ? ')">Supprimer</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

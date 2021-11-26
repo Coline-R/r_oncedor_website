@@ -9,46 +9,62 @@
     <div class="breadcrumb_thread">
         <a href="{{ path('home') }}">Accueil</a>
         <p>></p>
-        <a href="#" class="active">Commander</a>
+        <a href="{{ path('checkout_address') }}" class="active">Commander</a>
         <p>></p>
         <a href="#" class="active">Récapitulatif de commande</a>
     </div>
 
-    <div class="about">
-        <h2>Récapitulatif de commande</h2>
+    <h1>Récapitulatif de commande</h1>
+
+    <div class="recap">
         <div>
+            <h2>Votre adresse de livraison</h2>
+            <p>{{ app.user.firstName }} {{app.user.lastName}}</p>
+            <p>{{ deliverAdress.lineOne }}</p>
+            <p>{{ deliverAdress.lineTwo }}</p>
+            <p>{{ deliverAdress.postalCode }} {{ deliverAdress.city }}</p>
+            <p>{{ deliverAdress.country }}</p>
+        </div>
             <div>
-                <h3>Votre adresse de livraison</h3>
-                {{ deliverAdress.lineOne }}
-                <br />
-                {{ deliverAdress.lineTwo }}
-                <br />
-                {{ deliverAdress.postalCode }}
-                {{ deliverAdress.city }}
-                <br />
-                {{ deliverAdress.country }}
-            </div>
-            <div>
-                <h3>Votre commande</h3>
-                {% for item in orderCart %}
+                <h2>Votre commande</h2>                
                 <table>
-                    <tr>
-                        <td>{{ item.product.name }}</td>
-                        <td>{{ item.product.category.name }}</td>
-                        <td>{{ item.product.tome }}</td>
-                        <td>{{ item.product.price }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.product.price * item.quantity }}</td>
-                    </tr>
+                    <thead>
+                        <td>Titre</td>
+                        <td>Catégorie</td>
+                        <td>Tome</td>
+                        <td>Prix</td>
+                        <td>Quantité</td>
+                        <td>Total</td>
+                    </thead>
+                    <tbody>
+                        {% for item in orderCart %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.product.category.name }}</td>
+                            <td>{{ item.product.tome }}</td>
+                            <td>{{ item.product.price }}€</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.product.price * item.quantity }}€</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="total">Frais de port</td>
+                            <td>7,50€</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="total">Total de votre commande</td>
+                            <td>{{ totalPrice }}€</td>
+                        </tr>
+                    </tfoot>
                 </table>
-                {% endfor %}
+                <div class="form_block">
+                    <form action="{{ path('checkout_payement') }}" method="POST">
+                        <button type="submit">Payer</button>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="form_block">
-            <form action="{{ path('checkout_payement') }}" method="POST">
-                <button type="submit">Payer</button>
-            </form>
-        </div>
     </div>
 </main>
 {% endblock %}

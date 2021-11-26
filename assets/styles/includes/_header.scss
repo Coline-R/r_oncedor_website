@@ -1,9 +1,8 @@
 @charset 'UTF-8';
 
-/* *** HEADER *** */
-
 .header {
   background-color: $color_dark_hf;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,17 +63,14 @@
     }
 }
 
-.btn_link {
-    border : 1px solid $color-btn-purple;
-    border-radius: 10%;
-}
-
 .header_banner {
   width: 100%;
   padding: 5rem;
+
   background-image: url(/assets/pictures/banner.jpg);
   background-position: center;
   background-size: cover;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,4 +80,14 @@
   background-color: $color-dark_rgba;
   text-align: center;
   padding: 2rem;
+}
+
+.roncedor {
+  font-size: 2em;
+  font-family: $font-constantine;  
+}
+
+.subtitle {
+  font-size: 1em;
+  font-family: $font-constantine;  
 }

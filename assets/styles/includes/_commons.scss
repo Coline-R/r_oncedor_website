@@ -30,11 +30,15 @@ h2 {
   
 h3 {
     font-size: 1.25em;
-    color: $color-title-purple;
+    color: $color-purple-dark;
 }
   
 h4 {
     font-size: 1em;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 a {
@@ -42,19 +46,42 @@ a {
     color: $color-light;
 
     &.active {        
-      color: $color-btn-purple;
+      color: $color-purple-dark;
     }
 
     &:hover, 
     &:focus {
       text-decoration: underline;
+      color: $color-purple-dark;;
     }
+}
+
+.a-purple {
+  color: $color-purple-light;
+}
+
+.btn {
+  cursor: pointer;
+  color: $color-light;
+  background-color: $color-purple-dark;
+  border: 0 none;
+  border-radius: 5px;
+  // margin: 1rem 0.5rem;
+  padding:0.5rem;
+  font-size: 1em;
+  display: inline-block;
+
+  &:hover,
+  &:focus {
+    color: $color-purple-dark;
+    background-color: $color-light;
+  }
 }
 
 button {
     cursor: pointer;
     color: $color-light;
-    background-color: $color-btn-purple;
+    background-color: $color-purple-dark;
     border: 0 none;
     border-radius: 5px;
     margin: 0.5rem 0.5rem;
@@ -64,7 +91,7 @@ button {
   
     &:hover,
     &:focus {
-      color: $color-btn-purple;
+      color: $color-purple-dark;
       background-color: $color-light;
     }
 }

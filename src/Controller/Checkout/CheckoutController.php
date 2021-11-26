@@ -82,9 +82,12 @@ class CheckoutController extends AbstractController
             $totalCartPrice += $product->getPrice() * $quantity;
         }
 
+        $totalPrice = $totalCartPrice + 7.5;
+
         return $this->render('checkout/checkout/recap.html.twig', [
             'deliverAdress' => $deliverAddress,
-            'orderCart' => $cartData
+            'orderCart' => $cartData,
+            'totalPrice' => $totalPrice
         ]);
     }
 
@@ -112,6 +115,7 @@ class CheckoutController extends AbstractController
             
             $totalCartPrice += $product->getPrice() * $quantity;
         }
+        $totalPrice = $totalCartPrice + 7.5;
 
         // Create stripe payement intent
         $session = \Stripe\Checkout\Session::create([
@@ -120,9 +124,9 @@ class CheckoutController extends AbstractController
               'price_data' => [
                 'currency' => 'eur',
                 'product_data' => [
-                  'name' => 'Votre précommande sur le site ...',
+                  'name' => 'Votre précommande sur le site dev-r-oncedor.fr',
                 ],
-                'unit_amount' => $totalCartPrice * 100,
+                'unit_amount' => $totalPrice * 100,
               ],
               'quantity' => 1,
             ]],

@@ -26,35 +26,35 @@
             {% include 'admin/admin_includes/_admin_menu.html.twig' %}
             <div class="admin_content">
                 <div>
-                    <a href="{{path('admin_product_add')}}" class="btn_link">ajouter</a>
+                    <a href="{{path('admin_product_add')}}" class="btn">ajouter</a>
                 </div>
                 <table>
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Nom</th>
-                            <th>Prix</th>
-                            <th>Type</th>
-                            <th>Catégorie</th>
-                            <th>Edition</th>
-                            <th>Tome</th>
-                            <th>Actions</th>
+                            <td>#</td>
+                            <td>Nom</td>
+                            <td>Prix</td>
+                            <td>Type</td>
+                            <td>Catégorie</td>
+                            <td>Edition</td>
+                            <td>Tome</td>
+                            <td>Actions</td>
                         </tr>
                     </thead>
                     <tbody>
                         {% for product in products %}
                             <tr>
-                                <th>{{product.id}}</th>
-                                <th>{{product.name}}</th>
-                                <th>{{product.price}}</th>
-                                <th>{{product.type.name}}</th>
-                                <th>{{product.category.name}}</th>
-                                <th>{{product.edition.name}}</th>
-                                <th>{{product.tome}}</th>
-                                <th>
-                                    <a href="{{ path('admin_product_edit', { id: product.id }) }}" class="btn_link">Editer</a>
-                                    <a href="{{ path('admin_product_delete', { id: product.id }) }}" class="btn_link" onclick="return confirm('Etes vous sûre de vouloir supprimer ce produit : {{product.name}} ? ')">Supprimer</a>
-                                </th>
+                                <td>{{product.id}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{product.price}}</td>
+                                <td>{{product.type.name}}</td>
+                                <td>{{product.category.name}}</td>
+                                <td>{{product.edition.name}}</td>
+                                <td>{{product.tome}}</td>
+                                <td>
+                                    <a href="{{ path('admin_product_edit', { id: product.id }) }}" class="btn">Editer</a>
+                                    <a href="{{ path('admin_product_delete', { id: product.id }) }}" class="btn" onclick="return confirm('Etes vous sûre de vouloir supprimer ce produit : {{product.name}} ? ')">Supprimer</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

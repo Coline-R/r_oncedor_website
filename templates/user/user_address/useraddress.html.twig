@@ -22,23 +22,29 @@
         </div>
     {% endfor %}
 
-    <div class="admin_block">
+    <div class="user_block">
         {% include 'user/user_includes/_user_menu.html.twig' %}
-        <div>
-            {% for address in addresses %}
+        <div class="user_content">
             <div>
-                {{ address.name }}
-                {{ address.lineOne }}
-                {{ address.lineTwo }}
-                {{ address.postalCode }}
-                {{ address.city }}
-                {{ address.country }}
-                <a href="{{ path('user_address_edit', {id: address.id}) }}">Modifier</a>
-                <a href="{{ path('user_address_delete', {id: address.id}) }}"
-                    onclick="return confirm('Etes vous sûre de vouloir supprimer cette adresse : {{address.name}} ? ')">Supprimer</a>
+                <a href="{{ path('user_address_add') }}" class="btn">Ajouter une addresse</a>
             </div>
+            {% for address in addresses %}
+            <div class="content_block">
+                <div>
+                    <p class="bold">{{ address.name }}</p>
+                    <p>{{ address.lineOne }}</p>
+                    <p>{{ address.lineTwo }}</p>
+                    <p>{{ address.postalCode }} {{ address.city }}</p>
+                    <p>{{ address.country }}</p>
+                </div>
+                <div>
+                    <a href="{{ path('user_address_edit', {id: address.id}) }}" class="btn">Modifier</a>
+                    <a href="{{ path('user_address_delete', {id: address.id}) }}"
+                        onclick="return confirm('Etes vous sûre de vouloir supprimer cette adresse : {{address.name}} ? ')" class="btn">Supprimer</a>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 
 </main>

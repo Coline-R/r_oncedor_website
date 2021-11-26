@@ -4,6 +4,30 @@ table {
     table-layout: auto;
     border-collapse: collapse;
     empty-cells: show;
+
+    & > tbody > tr > td {
+        @include xs {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        @include max-sm {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    & > thead > tr > td {
+        @include xs {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        @include max-sm {
+            display: flex;
+            flex-direction: column;
+        }
+    }
 }
 
 tr {

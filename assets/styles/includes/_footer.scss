@@ -1,6 +1,5 @@
 @charset 'UTF-8';
 
-/* *** FOOTER *** */
 .footer {
   background-color: $color_dark_hf;
   padding: 1rem;
@@ -10,7 +9,6 @@
   display: flex;
   flex-direction: column;  
 
-  /* Media querie : from 600px */
   @include min-xs {
     align-items: center;
   }
@@ -20,7 +18,6 @@
     list-style-type: none;
     margin-bottom: 1rem;
 
-    /* Media querie : mobile < 600px */
     @include xs {
       flex-direction: column;
       justify-content: center;
@@ -30,20 +27,9 @@
     & > li {
       padding: 0 .5rem;
 
-      /* Media querie : mobile < 600px */
       @include xs {
         margin-bottom: .5rem;
       }
-    }
-  }
-
-  a {
-    text-decoration: none;
-    color: $color-light;
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
     }
   }
 }

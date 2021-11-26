@@ -36,7 +36,8 @@ class AdminOrderController extends AbstractController
         $orderLines = $order->getOrderLines();
 
         return $this->render('admin/admin_order/adminorderdetails.html.twig', [
-            'orderLines' => $orderLines
+            'orderLines' => $orderLines,
+            'order' => $order
         ]);
     }
 

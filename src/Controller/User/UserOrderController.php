@@ -31,6 +31,7 @@ class UserOrderController extends AbstractController
         $orderLines = $order->getOrderLines();
 
         return $this->render('/user/user_order/userorderdetails.html.twig', [
+            'order' => $order,
             'orderLines' => $orderLines
         ]);
     }

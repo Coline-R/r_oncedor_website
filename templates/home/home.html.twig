@@ -13,24 +13,24 @@
                 </div>
                 <ul>
                     <li><a href="{{ path('home') }}">Accueil</a></li>
-                    <li><a href="#">Précommande</a></li>
+                    <li><a href="{{ path('preorder') }}">Précommande</a></li>
                     <li><a href="{{ path('bibliography') }}">Bibliographie</a></li>
                     <li><a href="{{ path('about') }}">A propos</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li class="btn_link"><a href="#">Panier</a></li>
+                    <li><a href="{{ path('contact') }}">Contact</a></li>
+                    <li><a href="{{ path('cart') }}" class="btn">Panier</a></li>
 
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li class="btn_link"><a href="{{ path('admin_product') }}">Administration</a></li>
+                        <li><a href="{{ path('admin_product') }}" class="btn">Administration</a></li>
                     {% elseif is_granted('ROLE_USER') %}
-                        <li class="btn_link"><a href="#">Mon espace client</a></li>
+                        <li><a href="{{ path('user_profile') }}" class="btn">Mon espace client</a></li>
                     {% else %}
-                        <li class="btn_link"><a href="{{ path('app_register') }}">Inscription</a></li>
+                        <li><a href="{{ path('app_register') }}" class="btn">Inscription</a></li>
                     {% endif %}
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <li class="btn_link"><a href="{{ path('app_logout') }}">Me déconnecter</a></li>
+                        <li><a href="{{ path('app_logout') }}" class="btn">Me déconnecter</a></li>
                     {% else %}
-                        <li class="btn_link"><a href="{{ path('app_login') }}">Connexion</a></li>
+                        <li><a href="{{ path('app_login') }}" class="btn">Connexion</a></li>
                     {% endif %}
                 </ul>
             </nav>
@@ -42,7 +42,7 @@
         <main class="home_main" role="main">
             <div class="site_title">
                 <h1>R. Oncedor</h1>
-                <h4>Histoires Farfelues</h4>
+                <p class="subtitle">Histoires Farfelues</p>
             </div>
         </main>
     {% endblock %}
