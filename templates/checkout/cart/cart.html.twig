@@ -12,10 +12,12 @@
         <a href="#" class="active">Panier</a>
     </div>
 
-    <div class="about">
-        <h2>Panier</h2>
-        <div>
+    <div>
+        <h1>Panier</h1>
+        <div class="cart">
             {% if items | length > 0 %}
+            <p>Merci de bien vouloir vous connecter ou vous inscrire avant de valider votre commande ! Et n'oubliez pas d'ajouter une adresse dans votre profil</p>
+
             <table>
                 <thead>
                     <td>Titre</td>
@@ -33,31 +35,32 @@
                         <td>{{ item.product.name }}</td>
                         <td>{{ item.product.category.name }}</td>
                         <td>{{ item.product.tome }}</td>
-                        <td>{{ item.product.price }}</td>
+                        <td>{{ item.product.price }}€</td>
                         <td>{{ item.quantity }}</td>
-                        <td>{{ item.product.price * item.quantity }}</td>
+                        <td>{{ item.product.price * item.quantity }}€</td>
                         <td>
-                            <a href="{{ path('cart_add', {'id': item.product.id}) }}">+</a>
-                            <a href="{{ path('cart_remove', {'id': item.product.id}) }}">-</a>
+                            <a href="{{ path('cart_add', {'id': item.product.id}) }}" class="btn">+</a>
+                            <a href="{{ path('cart_remove', {'id': item.product.id}) }}" class="btn">-</a>
                         </td>
                         <td>
-                            <a href="{{ path('cart_remove', {'id': item.product.id}) }}">Supprimer</a>
+                            <a href="{{ path('cart_remove', {'id': item.product.id}) }}" class="btn">Supprimer</a>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
                 <tfoot>
                     <td colspan="5" class="total">Total du panier</td>
-                    <td>{{ totalCartPrice }}</td>
-                    <td>€</td>
+                    <td>{{ totalCartPrice }}€</td>
                 </tfoot>
             </table>
 
+            <a href="{{ path('checkout_address') }}" class="btn">Commander</a>
+
             {% else %}
-            <p>Vous n'avez pas de produits dans votre panier !</p>
+                <p>Vous n'avez pas de produits dans votre panier !</p>
             {% endif %}
         </div>
-        <a href="#">Commander</a>
+
     </div>
 </main>
 {% endblock %}
