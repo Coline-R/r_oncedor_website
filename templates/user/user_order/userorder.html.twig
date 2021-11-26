@@ -16,16 +16,23 @@
 
     <h2>Mes commandes</h2>
 
-    <div class="admin_block">
+    <div class="user_block">
         {% include 'user/user_includes/_user_menu.html.twig' %}
-        {% for order in orders %}
-        <div>
-            <p>Numéro de commande : {{ order.id }}</p>
-            <p>Date de commande : {{ order.orderDate|date("m/d/Y") }}</p>
-            <p>Statut de la commande {{ order.isShipped }}</p>
-            <a href="#">Voir les détails</a>
+        <div class="user_content">
+            {% for order in orders %}
+            <div class="content_block">
+                <p>Numéro de commande : {{ order.id }}</p>
+                <p>Date de commande : {{ order.orderDate|date("m/d/Y") }}</p>
+                {% if not order.isShipped %}
+                    <p>Expédiée</p>
+                    <p>Date d'expédition' : {{ order.shippedDate|date("m/d/Y") }}</p>
+                    {% else %}
+                    <p>En attente d'éxpédition</p>
+                {% endif %}
+                <a href="#" class="btn">Voir les détails</a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
 
     </div>
 </main>
