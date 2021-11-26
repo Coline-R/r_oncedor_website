@@ -1,6 +1,6 @@
 @charset 'UTF-8';
 
-/* *** MAIN *** */
+// MAIN
 .main {
     margin: 1rem;
     
@@ -10,12 +10,10 @@
 
 }
 
-/* *About page* */
-
+// ABOUT
 .about {
     width: 60%;
 
-    /* Media querie : mobile < 600px */
     @include xs {
         width: 90%;
         }
@@ -23,34 +21,50 @@
     @include max-sm {
         width: 95%;
     }
+}
+
+.presentation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include xs {
+        flex-direction: column;
+        }
+
+    @include max-sm {
+        flex-direction: column;
+    }
+
+    & > img {
+        height: 15rem;
+        width: auto;
+    }
+
+    & > p {
+        padding: 2rem;
+    }
+
+    & > div {
+        padding: 1rem;
+        margin: 2rem;
+    }
+}
+
+.social {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    img {
+        height: 35px;
+        width: auto;
+    }
 
     & > div {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-
-        /* Media querie : mobile < 600px */
-        @include xs {
-            flex-direction: column;
-            }
-
-        @include max-sm {
-            flex-direction: column;
-        }
-
-        & > img {
-            height: 15rem;
-            width: auto;
-        }
-    
-        & > p {
-            padding: 2rem;
-        }
-
-        & > div {
-            padding: 1rem;
-            margin: 2rem;
-        }
     }
 }
 
@@ -60,7 +74,6 @@
     padding: 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 
     @include xs {
         flex-direction: column;
@@ -69,52 +82,32 @@
     @include max-sm {
         flex-direction: column;
     }
-
-    .admin_menu {
-        width: 20%;
-        padding: 1rem;
-        background-color: $color_dark_hf;
-
-        @include xs {
-            width: 80%;
-        }
-    
-        @include max-sm {
-            width: 80%;
-        }
-    
-        li {
-            list-style-type: none;
-        }
-    
-        & > ul > ul > li {
-            margin-left: 1.5rem;
-        }
-    }
+}
 
     .admin_content {
-        width: 80%;
+    width: 80%;
+    padding: 1rem;
 
+    display: flex;
+    flex-direction: column;
+
+    a {
+        padding: .5rem;
+    }
+
+    & > div {
+        width: 100%;
+        padding: 1rem;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: end;
+    }
 
-        a {
-            padding: .5rem;
-        }
-
-        & > div {
-            width: 100%;
-            padding: 1rem;
-            display: flex;
-            justify-content: end;
-        }
+    & > table {
+        max-width: 90%;
     }
 }
 
-/* *Bibliography page* */
-
+// BIBLIOGRAPHY
 .bibliography {
     width: 70%;
 }
@@ -122,14 +115,8 @@
 .book_category {
     padding: 2rem;
     
-    & > h3 {
-        border-bottom: 1px solid $color-light;
-        margin-bottom: 2rem;
-    }
-
     & > div {
         display: flex;
-        align-items: center;
         justify-content: space-around;
         flex-wrap: wrap;
     }
@@ -140,41 +127,199 @@
     margin: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
     & > img {
         height: 20rem;
         width: auto;
     }
+
+    & > p {
+        margin-bottom: 0.7rem;
+    }
 }
 
-.user_block {
-    padding: 2rem;
+// BOOK
+.book_presentation {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    border: 2px solid $color-btn-purple;
-    border-radius: 10%;
+    @include xs {
+        flex-direction: column;
+        width: 95%;
+        }
 
+    @include max-sm {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    & > img {
+        height: 25rem;
+        width: auto;
+    }
+
+    & > p {
+        padding: 2rem;
+    }
+
+    & > div {
+        padding: 1rem;
+        margin: 2rem;
+    }
+}
+
+// PREORDER
+.preorder {
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+
+    @include xs {
+        width: 95%;
+        }
+
+    @include max-sm {
+        width: 95%;
+    }
+
+    p {
+        margin-bottom: 1rem;
+    }
+}
+
+.preorder_presentation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include xs {
+        flex-direction: column;
+        width: 95%;
+        }
+
+    @include max-sm {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    & > img {
+        height: 25rem;
+        width: auto;
+    }
+
+    & > p {
+        padding: 2rem;
+    }
 
     & > div {
-        margin: 1rem;
-        width: 90%;
-        display: flex;
+        padding: 1rem;
+        margin: 2rem;
+    }
+}
+
+// CART
+.cart {
+    table {
+        margin: 1rem 0;
+    }
+
+    .btn {
+        margin-top: 1rem;
+    }
+}
+
+// CHECKOUT RECAP
+.recap{
+    width: 85%;
+    display: flex;
+    justify-content: space-around;
+
+    @include xs {
         flex-direction: column;
-        
-        & > p {
-            width: 100%;
         }
 
-        & > a {
-            padding: .5rem;
-            margin: 1.5px;
-            background-color: $color-btn-purple;
-            border-radius: 12px;
+    @include max-sm {
+        flex-direction: column;
+    }
+}
+
+// USER PAGE
+.user_block {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+
+    @include xs {
+        flex-direction: column;
+    }
+
+    @include max-sm {
+        flex-direction: column;
+    }
+}
+.user_content {
+    padding: 1rem;
+    margin-left: 5rem;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    @include xs {
+        margin-left: 0;
         }
+
+    @include max-sm {
+        margin-left: 0;
+    }
+
+    .content_block{
+        padding: 1rem;
+        margin-top: 2rem;
+        border: 1px solid $color-purple-dark;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+
+        @include xs {
+            flex-direction: column;
+        }
+    
+        @include max-md {
+            flex-direction: column;
+        }
+    }
+}
+
+// SECONDARY MENU
+.menu {
+    width: 20%;
+    padding: 1rem;
+    background-color: $color_dark_hf;
+
+    @include xs {
+        width: 80%;
+    }
+
+    @include max-sm {
+        width: 80%;
+    }
+
+    li {
+        list-style-type: none;
+        padding: .5rem;
+        border: 0.5px solid $color-light;
+        border-radius: 10px;
+    }
+
+    & > ul > ul > li {
+        margin-left: 1.5rem;
     }
 }
