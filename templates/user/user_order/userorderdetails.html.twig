@@ -16,14 +16,50 @@
         <a href="#" class="active">Détail de ma commande</a>
     </div>
 
-    <h2>Mes commandes</h2>
+    <h1>Détails de ma commande n° {{ order.id }} du {{ order.orderDate|date("d/m/Y") }}</h1>
 
     <div class="user_block">
-        {% for orderLine in orderLines %}
-        <div>
-            <p>Produit {{ orderLine.product.name }}</p>
+        {% include 'user/user_includes/_user_menu.html.twig' %}
+        <div class="user_content">
+            <h2>Mes Informations</h2>
+            <p class="bold">Adresse de livraison :</p>
+            <p>{{ order.address.lineone }}</p>
+            <p>{{ order.address.linetwo }}</p>
+            <p>{{ order.address.postalCode }} {{ order.address.city }}</p>
+
+            <h2>Commande</h2>
+            <table>
+                <thead>
+                    <td>Titre</td>
+                    <td>Catégorie</td>
+                    <td>Tome</td>
+                    <td>Prix</td>
+                    <td>Statut</td>
+                    {% if not order.isShipped %}
+                        <td>Date d'expédition</td>
+                {% endif %}
+                </thead>
+                <tbody>
+                    {% for orderLine in orderLines %}
+                    <tr>
+                        <td>{{ orderLine.product.name }}</td>
+                        <td>{{ orderLine.product.category.name }}</td>
+                        <td>{{ orderLine.product.tome }}</td>
+                        <td>{{ orderLine.product.price }}€</td>
+                        {% if not order.isShipped %}
+                            <td>Expédiée</td>
+                        {% else %}
+                            <td>En attente d'éxpédition</td>
+                        {% endif %}
+
+                        {% if not order.isShipped %}
+                        <td>Date d'expédition' : {{ order.shippedDate|date("m/d/Y") }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        {% endfor %}
     </div>
 </main>
 {% endblock %}
