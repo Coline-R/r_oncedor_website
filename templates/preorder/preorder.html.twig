@@ -12,36 +12,43 @@
         <a href="#" class="active">Précommande</a>
     </div>
 
-    <div class="about">
-        <h2>Précommande</h2>
-        <h3>{{ book.name }} - {{ book.category.name }} - Tome {{ book.tome }}</h3>
-        <div>
-            <img src="{{ vich_uploader_asset(book, 'imageFile') }}" alt="{{ book.name }}" />
+
+    <h1>Précommande</h1>
+    {% if book.tome > 0 %}
+        <h2>{{ book.name }} - {{ book.category.name }} - Tome {{ book.tome }}</h2>
+    {% else %}
+        <h2>{{ book.name }}</h2>
+    {% endif %}
+
+    <div class="preorder">
+        <div class="preorder_presentation">
+            <img src="{{ vich_uploader_asset(book, 'imageFile') }}" alt="Couverture de {{ book.name }}" />
             <div>
                 <h3> Détails </h3>
                 <p>Edition {{ book.edition.name }}</p>
-                <p>{{ book.description }}</p>
+                <p>{{ book.description|nl2br }}</p>
                 <h3> Résumé </h3>
-                <p> {{book.summary}} </p>
+                <p> {{ book.summary|nl2br }} </p>
+                <a href="{{ path('cart_add', {id: book.id}) }}" class="btn">Précommander</a>
             </div>
         </div>
-        <a href="#">Précommander</a>
-        <h3>Modalités de précommande</h3>
-        <div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla sint adipisci consectetur. A id iusto
-                ipsam? Praesentium voluptatibus doloremque quisquam blanditiis iure. Quas ipsa velit fugit fuga libero
-                et ad! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias nihil iure ex rerum beatae
-                voluptate, eos deserunt! Itaque temporibus molestiae tempora odio ut atque cum, sed modi saepe nesciunt
-                magnam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum modi impedit pariatur
-                voluptatibus corrupti? Esse, aliquid corporis. Illo, atque qui fugit, sit dolorum ab nisi neque, est
-                exercitationem deserunt vero. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum culpa
-                cumque rerum quod, explicabo error velit odit soluta modi nam accusantium. Porro voluptatum eveniet
-                sapiente dolore facere culpa aspernatur repellendus. Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Minima iusto beatae expedita itaque totam, recusandae dolor nulla voluptas inventore, odio
-                molestiae? Autem ut distinctio totam commodi, dolor deserunt. Ducimus, cumque? Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Iure possimus suscipit ea, totam dolorem ullam? Perspiciatis
-                laudantium molestias iusto iste quod nisi repudiandae doloribus earum, et alias odit laborum itaque.
+       
+        
+        <div class="conditions">
+            <h3>Modalités de précommande</h3>
+            <p>
+                Les précommandes resteront ouvertes pendant 3 semaines, <span class="bold">jusqu'au 19/12/2021, inclus</span>. Peut-être davantage
+                si nous n'avons pas atteint 80 commandes minimum (le nécessaire pour faire imprimer le stock).
             </p>
+            <p>
+                Une fois le délais écoulé et/ou le stock suffisant atteint, les livres seront imprimés puis préparé pour
+                la livraison, prévue pour fin décembre 2021
+            </p>
+            <p>
+                Les frais de ports pour toutes précommandes seront de 7.50€. La livraison sera effectuée à votre
+                domicile par Colissimo suivi.
+            </p>
+            <a href="{{ path('cart_add', {id: book.id}) }}" class="btn">Précommander</a>
         </div>
     </div>
 </main>
