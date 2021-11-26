@@ -29,7 +29,7 @@
                     {% else %}
                     <p>En attente d'éxpédition</p>
                 {% endif %}
-                <a href="#" class="btn">Voir les détails</a>
+                <a href="{{ path('user_order_details', {id:order.id}) }}" class="btn">Voir les détails</a>
             </div>
             {% endfor %}
         </div>
