@@ -12,15 +12,15 @@
         <a href="#" class="active">Commander</a>
     </div>
 
-    <div class="about">
-        <h2>Commander</h2>
+    <div>
+        <h1>Commander</h1>
         <div>
-            <h3>Adresse de livraison</h3>
+            <h2>Adresse de livraison</h2>
             <p>Choisissez votre adresse de livraison</p>
             <div class="form_block">
                 {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <button type="submit" class="btn">Valider</button>
+                    {{ form_row(form.addresses) }}
+                    <button type="submit" class="btn">Valider</button>
                 {{ form_end(form) }}
             </div>
         </div>
