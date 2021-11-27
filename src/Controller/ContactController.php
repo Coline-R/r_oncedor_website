@@ -28,8 +28,8 @@ class ContactController extends AbstractController
             
              // send user's message to the admin
             $email = (new TemplatedEmail())
-            ->from('contact@dev-r-oncedor.fr')
-            ->to(new Address('test@test.com'))
+            ->from('no-reply@dev-r-oncedor.fr')
+            ->to(new Address('contact@dev-r-oncedor.fr'))
             ->subject('Message du formulaire de contact de dev-r-oncedor.fr')
 
             ->htmlTemplate('contact/contact_mail.html.twig')
