@@ -69,11 +69,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $orders;
 
-    /**
-     * @ORM\OneToOne(targetEntity=UserConsent::class, mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $userConsent;
-
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
@@ -273,23 +268,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $order->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getUserConsent(): ?UserConsent
-    {
-        return $this->userConsent;
-    }
-
-    public function setUserConsent(UserConsent $userConsent): self
-    {
-        // set the owning side of the relation if necessary
-        if ($userConsent->getUser() !== $this) {
-            $userConsent->setUser($this);
-        }
-
-        $this->userConsent = $userConsent;
 
         return $this;
     }

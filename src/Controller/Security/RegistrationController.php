@@ -3,9 +3,7 @@
 namespace App\Controller\Security;
 
 use App\Entity\User;
-use App\Entity\UserConsent;
 use App\Form\RegistrationFormType;
-use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,11 +26,9 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface, UserRepository $userRepo): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
         $user = new User();
-        $userConsent = new UserConsent();
-
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -52,19 +48,12 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('no-reply@dev-r-oncedor.fr', 'no-reply-dev-r-oncedor.fr'))
+                    ->from(new Address('no-reply@roncedor-test.fr', 'no-reply-r.oncedor-test'))
                     ->to($user->getEmail())
                     ->subject('Confirmer votre adresse mail')
                     ->htmlTemplate('security/registration/confirmation_email.html.twig')
             );
-            
-            $theUser = $user->getId();
-            $userConsent->setUser($userRepo->findOneBy(['id' => $theUser ]));
-            $userConsent->setIsConsent(true);
-            $userConsent->setUpdatedAt(new \DateTimeImmutable);
-
-            $entityManager->persist($userConsent);
-            $entityManager->flush();
+            // do anything else you need here, like send an email
 
             $this->addFlash(
                 'info',
