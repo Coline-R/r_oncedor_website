@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}Lien de réinitialisation envoyé - R. Oncedor{% endblock %}
 
 {% block main %}
-<p>
-    Si un compte associé à votre adresse email existe bien, un lien permettant de réinitialiser votre mot de passe va
-    vous être envoyé.
-    Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData,
-    'ResetPasswordBundle') }}.
-</p>
-<p>Si vous ne recevez pas le mail, regardez dans votre dossier spams/indésirables ou <a
-        href="{{ path('app_forgot_password_request') }}">tentez à nouveau</a>.</p>
+<main class="main" role="main">
+    <p>
+        Si un compte associé à votre adresse email existe bien, un lien permettant de réinitialiser votre mot de passe va
+        vous être envoyé.
+        Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData,
+        'ResetPasswordBundle') }}.
+    </p>
+    <p>Si vous ne recevez pas le mail, regardez dans votre dossier spams/indésirables ou <a
+            href="{{ path('app_forgot_password_request') }}">tentez à nouveau</a>.</p>
+</main>
 {% endblock %}
