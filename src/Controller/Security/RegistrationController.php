@@ -3,7 +3,9 @@
 namespace App\Controller\Security;
 
 use App\Entity\User;
+use App\Entity\UserConsent;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +28,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface, UserRepository $userRepo): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -53,7 +55,17 @@ class RegistrationController extends AbstractController
                     ->subject('Confirmer votre adresse mail')
                     ->htmlTemplate('security/registration/confirmation_email.html.twig')
             );
-            // do anything else you need here, like send an email
+            
+            // store user consent in database
+            $userConsent = new UserConsent;
+            $theUser = $userRepo->findOneBy(['id' => $user->getId()]);
+
+            $userConsent->setUser($theUser);
+            $userConsent->setIsConsent(true);
+            $userConsent->setUpdatedAt(new \DateTimeImmutable());
+
+            $entityManager->persist($userConsent);
+            $entityManager->flush();
 
             $this->addFlash(
                 'info',
