@@ -1,0 +1,18 @@
+@charset 'UTF-8';
+
+.alert {
+    padding: 1rem;
+    color: $color-dark;
+}
+
+.alert-success {
+    border: 1px solid green;
+    border-radius: 10px;
+    background-color: palegreen;
+}
+
+.alert-danger {
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: palevioletred;
+}

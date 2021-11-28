@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} {{book.name}} - R. Oncedor {% endblock %}
+{% block metaContent %}content="R. Oncedor - Histoires Farfelues. {{book.name}}, découvrez ce livre de R. Oncedor, dans sa version {{book.edition}} !"{% endblock %}
 
 {% block main %}
     <!-- MAIN -->
